@@ -1,0 +1,40 @@
+Answer the question using the following information.
+
+First, consider the dataset sample:
+
+country,le_F,le_M
+Republic of Korea,85.59325,79.51833
+Belgium,83.82399,79.33847
+Slovakia,81.16243,74.3065
+Liberia,72.33456,70.20627
+Grenada,79.6178,72.55296
+Sierra Leone,66.77247,65.89542
+Equatorial Guinea,71.32442,69.33343
+Belarus,79.17292,68.60118
+Mongolia,74.74121,68.5719
+Monaco,86.22832,80.21092
+
+
+Additionally, the dataset profile is as follows:
+
+The key data profile information for this dataset includes:
+Rows: 194 (all rows profiled). Columns: 3.
+**country**: Data is of type text. There are 194 unique values. 
+**le_F**: Data is of type float. Mean 78.121, standard deviation 4.78529. Minimum 66.7725, maximum 87.9728. Main value ranges: 68.9547 to 75.6077; 76.3058 to 81.3207; 82.2523 to 86.2805. 
+**le_M**: Data is of type float. Mean 74.3096, standard deviation 4.23769. Minimum 63.7412, maximum 83.2192. Main value ranges: 65.9093 to 71.7363; 72.2278 to 76.679; 77.6994 to 81.9283. 
+
+Based on this profile, please add sentence(s) to enrich the dataset description.
+
+Furthermore, the semantic profile of the dataset columns is as follows:
+The key semantic information for this dataset includes:
+**country**: Represents location. Contains spatial data (resolution: Country). 
+**le_F**: 
+**le_M**: 
+
+Based on this information, please add sentence(s) discussing the semantic profile in the description.
+
+Question: Based on the information above and the requirements, provide a dataset description in sentences. Use only natural, readable sentences without special formatting.
+
+Answer:
+
+Target length: approximately 100 words.

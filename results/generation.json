@@ -1,0 +1,29 @@
+{
+  "status": "baseline_generated",
+  "prepared_utc": "2026-11-13T17:17:58.012283+00:00",
+  "dataset_file": "health_ineq_online_table_13.csv",
+  "dataset_source": "https://opportunityinsights.org/wp-content/uploads/2018/04/health_ineq_online_table_13.csv",
+  "csv_sha256": "29e93dff6736b50c2a488c12acf938798b1ba8b89a36f3abb08c5db7b507aa17",
+  "rows": 194,
+  "columns": [
+    "country",
+    "le_F",
+    "le_M"
+  ],
+  "missing_values": {
+    "country": 0,
+    "le_F": 0,
+    "le_M": 0
+  },
+  "sample_rows": 10,
+  "seed": 42,
+  "autoddg_version": "0.1.2",
+  "python_version": "3.11.15",
+  "model": "gpt-4o-mini",
+  "description_words": 100,
+  "used_paper_context": false,
+  "used_readme_context": false,
+  "used_stata_context": false,
+  "llm_calls_made_by_this_run": true,
+  "generation_seconds": 8.477018708999822
+}

@@ -1,0 +1,2 @@
+# Official AutoDDG source pinned to the commit used for this setup.
+autoddg @ git+https://github.com/VIDA-NYU/AutoDDG.git@f286ac697bdb0a199eac1ce0778401f30341b4bb

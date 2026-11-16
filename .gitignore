@@ -258,3 +258,16 @@ __marimo__/
 
 # Common data directories
 data/
+
+# Baseline fixtures intentionally versioned for this project
+!data/
+!data/health_ineq_online_table_13.csv
+!results/sample.csv
+
+# Additional credential and local file exclusions
+.env.*
+*.pem
+*.key
+credentials*.json
+secrets*.json
+.DS_Store

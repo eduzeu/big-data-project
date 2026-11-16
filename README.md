@@ -20,19 +20,13 @@ The raw output is preserved for the later comparison. These limitations have not
 ### 1. Clone the project repository
 
 ```bash
-git clone https://github.com/eduzeu/big-data-project.git
+git clone --branch feature/autoddg-baseline https://github.com/eduzeu/big-data-project.git
 cd big-data-project
 ```
 
-### 2. Add the baseline files
+### 2. Set up the environment and generate the description
 
-The baseline script, requirements, and data have **not yet been committed to this repository**. Copy these items from the prepared local project into the cloned folder before continuing:
-
-- `run_baseline.py`
-- `requirements.txt`
-- `data/`, containing `health_ineq_online_table_13.csv`
-
-### 3. Set up the environment and generate the description
+This branch includes the runner, source-pinned requirements, starter CSV, and saved baseline results. The Python environment and API key are not included.
 
 With Python 3.11 and Git installed, run:
 
@@ -40,12 +34,32 @@ With Python 3.11 and Git installed, run:
 python3.11 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
-python run_baseline.py --generate --prompt-for-key
+python run_baseline.py --generate --prompt-for-key --output results/new-run
 ```
 
-Paste the OpenAI API key only at the hidden prompt. The key is not saved. The run makes paid API calls and writes the description to `results/description.md`, with supporting outputs in the same folder.
+Paste the OpenAI API key only at the hidden prompt. The key is not saved. The run makes paid API calls and writes the new description to `results/new-run/description.md`, with supporting outputs in that folder. The original baseline in `results/` stays unchanged.
 
-Do not commit API keys or credential files.
+To verify setup without making LLM calls:
+
+```bash
+python run_baseline.py --output results/setup-check
+```
+
+For another dataset, add `--csv path/to/dataset.csv` and choose a new `--output` folder. Each run can overwrite files in its output folder, so use a different folder for each dataset or experiment.
+
+`requirements.txt` pins the official AutoDDG source commit. `requirements-lock.txt` records the resolved versions from the original Python 3.11 environment.
+
+## Saved baseline outputs
+
+- `results/description.md`: original generated description.
+- `results/content_profile.md` and `results/structural_notes.md`: algorithmic profiling outputs.
+- `results/semantic_profile.md`: generated column semantics.
+- `results/prompt.txt`: exact description prompt.
+- `results/sample.csv`: reproducible 10-row input sample.
+- `results/generation.json`: successful run configuration and timing.
+- `results/preparation.json`: earlier preparation-only record; it does not indicate failure of the later successful run.
+
+Do not commit API keys or credential files. `.gitignore` excludes common credential files and local Python environments.
 
 ## Next step
 
