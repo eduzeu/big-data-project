@@ -1,0 +1,24 @@
+{
+  "method": "BM25",
+  "paper_count": 5,
+  "dataset_count": 10,
+  "passage_count": 1097,
+  "chunk_words": 220,
+  "overlap_words": 40,
+  "automated_tests_passed": 5,
+  "real_csv_preparation": {
+    "dataset_id": "life_county_expectancy",
+    "rows": 1559,
+    "columns": 49,
+    "retrieved_chunk_ids": [
+      "life_expectancy:p7:w180",
+      "life_expectancy:p3:w0",
+      "life_expectancy:p6:w0",
+      "life_expectancy:p5:w180"
+    ],
+    "csv_sha256": "af9a8ad1f208c10e62079db19b4d01a79c2c15ba668cdd9a98c4ef705f671565",
+    "index_sha256": "153d20ad76c9ac4b81fb5c89f99e661ff9b57f27ebb019733597b33f3c54f319"
+  },
+  "llm_generation": "Not executed against a provider; integration tested with a mocked model. No API key available.",
+  "quality_evaluation": "Not yet measured against independently labeled relevance judgments."
+}

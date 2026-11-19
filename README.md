@@ -117,3 +117,61 @@ Text extraction checks confirm usable text, not perfect recovery of tables or eq
 
 Next: split these pages into passages, index them, and test retrieval with questions
 about each dataset before connecting retrieved passages to AutoDDG.
+
+## Search papers and prepare enriched descriptions
+
+This branch adds local BM25 keyword retrieval. It needs no embedding service or API
+key. Pages are split into 220-word passages with 40-word overlap; passages stay within
+one PDF page. Results are restricted to the paper mapped to the selected dataset,
+ranked by BM25, and limited to one passage per page to reduce duplicate evidence.
+
+After collecting papers:
+
+```bash
+python paper_retrieval.py build
+python paper_retrieval.py search --dataset-id life_county_expectancy --query "How is life expectancy estimated by income quartile?"
+```
+
+Each result includes the passage, score, chunk ID, paper title, source URL, physical
+PDF page, page label, and PDF checksum. BM25 scores indicate word-match relevance;
+they are not probabilities or proof that a passage answers the question. Queries
+using different terminology may need rewording. PDF extraction can merge words,
+especially in the life expectancy article. Formal retrieval quality evaluation is
+still pending; current checks cover filtering, provenance, and a method lookup.
+
+To try the description workflow with a real selected CSV, download the public county
+table (or use your team's copy):
+
+```bash
+curl --fail --location https://opportunityinsights.org/wp-content/uploads/2018/04/health_ineq_online_table_11.csv --output data/health_ineq_online_table_11.csv
+python run_baseline.py --csv data/health_ineq_online_table_11.csv --dataset-id life_county_expectancy --output papers/local/demo_run
+```
+
+This prepares the sample, profile, retrieved passages, and combined description
+profile without LLM calls. To generate an enriched description, repeat with
+`--generate --prompt-for-key`. The key is entered privately and is not saved.
+Use `--paper-query "your question"` to override the default query made from the
+manifest dataset name and CSV column names.
+
+AutoDDG's existing semantic analysis still receives the CSV sample only. The final
+description call receives the content profile plus the retrieved paper evidence.
+The runner saves `retrieved_passages.json`, `paper_context.txt`, and
+`description_profile.md`, then saves the actual prompt, description, and generation
+metadata when `--generate` succeeds. Paper-derived claims are requested to cite
+chunk IDs, but generated citations still need review. Filename matching is a guard
+against choosing the wrong dataset ID, not a validation of CSV contents.
+
+Omit `--dataset-id` to retain the original baseline behavior. Paper runs require a
+separate output directory so they cannot overwrite the default baseline results.
+Use separate directories for baseline and enriched comparisons with the same CSV,
+model, sample size, and seed. No generated improvement claim is made yet.
+
+Offline checks (after downloading the county CSV and building the index):
+
+```bash
+python -m unittest discover -s . -p test_paper_retrieval.py -v
+```
+
+The generation integration test uses a mocked model, so it checks that evidence is
+passed through without making paid API calls. Local indexes, downloaded datasets,
+and run outputs remain outside Git.
