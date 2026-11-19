@@ -271,3 +271,6 @@ data/
 credentials*.json
 secrets*.json
 .DS_Store
+
+# Downloaded research papers and extracted full text stay local.
+papers/local/

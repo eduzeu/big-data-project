@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "papers": [
+    {
+      "paper_id": "inventors",
+      "title": "Who Becomes an Inventor in America? The Importance of Exposure to Innovation",
+      "landing_url": "https://opportunityinsights.org/paper/losteinsteins/",
+      "pdf_url": "https://opportunityinsights.org/wp-content/uploads/2019/01/patents_paper.pdf",
+      "version_note": "November 2018 author-hosted paper linked as Full Paper by Opportunity Insights.",
+      "title_terms": [
+        "who becomes an inventor",
+        "importance of exposure"
+      ]
+    },
+    {
+      "paper_id": "opportunity_atlas",
+      "title": "The Opportunity Atlas: Mapping the Childhood Roots of Social Mobility",
+      "landing_url": "https://opportunityinsights.org/paper/the-opportunity-atlas/",
+      "pdf_url": "https://opportunityinsights.org/wp-content/uploads/2018/10/atlas_paper.pdf",
+      "version_note": "January 2025 cover date; current Opportunity Insights Full Paper link. URL directory date does not identify the paper version.",
+      "title_terms": [
+        "opportunity atlas",
+        "childhood roots"
+      ]
+    },
+    {
+      "paper_id": "life_expectancy",
+      "title": "The Association Between Income and Life Expectancy in the United States, 2001-2014",
+      "landing_url": "https://opportunityinsights.org/paper/lifeexpectancy/",
+      "pdf_url": "https://sites.bu.edu/geriatricsfellowship/files/2016/05/Income-and-life-expectancy.pdf",
+      "version_note": "2016 JAMA article reprint hosted by Boston University. This is the main article, not its separate technical appendix.",
+      "title_terms": [
+        "association between income and life expectancy",
+        "united states"
+      ]
+    },
+    {
+      "paper_id": "race_opportunity",
+      "title": "Race and Economic Opportunity in the United States: An Intergenerational Perspective",
+      "landing_url": "https://opportunityinsights.org/paper/race/",
+      "pdf_url": "https://opportunityinsights.org/wp-content/uploads/2018/04/race_paper.pdf",
+      "version_note": "December 2019 cover date; full paper linked by Opportunity Insights.",
+      "title_terms": [
+        "race and economic opportunity",
+        "intergenerational perspective"
+      ]
+    },
+    {
+      "paper_id": "college_mobility",
+      "title": "Income Segregation and Intergenerational Mobility Across Colleges in the United States",
+      "landing_url": "https://opportunityinsights.org/paper/undermatching/",
+      "pdf_url": "https://opportunityinsights.org/wp-content/uploads/2020/02/coll_mrc_qje_paper.pdf",
+      "version_note": "February 2020 cover date; full QJE paper linked from the Mobility Report Cards project. The older NBER version is not included.",
+      "title_terms": [
+        "income segregation",
+        "intergenerational mobility"
+      ]
+    }
+  ],
+  "datasets": [
+    {
+      "dataset_id": "inventors_college",
+      "name": "Innovation Rates by College",
+      "csv_filename": "table_3.csv",
+      "paper_id": "inventors",
+      "documentation_filename": "Inventors-Codebook-Table-3.pdf",
+      "mapping_basis": "Selected dataset research-group folder and the official paper page listing its corresponding data table.",
+      "csv_content_verified": false
+    },
+    {
+      "dataset_id": "inventors_childhood_cz",
+      "name": "Innovation Rates by Childhood Commuting Zone, Gender, and Parent Income",
+      "csv_filename": "table_1a.csv",
+      "paper_id": "inventors",
+      "documentation_filename": "Inventors-Codebook-Table-1.pdf",
+      "mapping_basis": "Selected dataset research-group folder and the official paper page listing its corresponding data table.",
+      "csv_content_verified": false
+    },
+    {
+      "dataset_id": "atlas_county_covariates",
+      "name": "Table 12 Neighborhood Characteristics by County",
+      "csv_filename": "cty_covariates.csv",
+      "paper_id": "opportunity_atlas",
+      "documentation_filename": "Codebook-for-Table-10.pdf",
+      "mapping_basis": "Selected dataset research-group folder and the official paper page listing its corresponding data table.",
+      "csv_content_verified": false,
+      "documentation_pairing_warning": "Folder table number differs from PDF filename; verify pairing"
+    },
+    {
+      "dataset_id": "atlas_county_outcomes",
+      "name": "Table 4 Household Income and Incarceration for Children from Low-Income Households by County, Race, and Gender",
+      "csv_filename": "county_outcomes_simple.csv",
+      "paper_id": "opportunity_atlas",
+      "documentation_filename": "Codebook-for-Table-2.pdf",
+      "mapping_basis": "Selected dataset research-group folder and the official paper page listing its corresponding data table.",
+      "csv_content_verified": false,
+      "documentation_pairing_warning": "Folder table number differs from PDF filename; verify pairing"
+    },
+    {
+      "dataset_id": "life_national_mortality",
+      "name": "National Mortality Rates by Gender, Age, Year, and Income Percentile",
+      "csv_filename": "health_ineq_online_table_15.csv",
+      "paper_id": "life_expectancy",
+      "documentation_filename": "health_ineq_online_table_15_readme.pdf",
+      "mapping_basis": "Selected dataset research-group folder and the official paper page listing its corresponding data table.",
+      "csv_content_verified": false
+    },
+    {
+      "dataset_id": "life_county_expectancy",
+      "name": "County Life Expectancy by Gender and Income Quartile",
+      "csv_filename": "health_ineq_online_table_11.csv",
+      "paper_id": "life_expectancy",
+      "documentation_filename": "health_ineq_online_table_11_readme.pdf",
+      "mapping_basis": "Selected dataset research-group folder and the official paper page listing its corresponding data table.",
+      "csv_content_verified": false
+    },
+    {
+      "dataset_id": "race_national_statistics",
+      "name": "National Statistics by Parent Income Percentile, Gender, and Race",
+      "csv_filename": "table_1.csv",
+      "paper_id": "race_opportunity",
+      "documentation_filename": "table_1.pdf",
+      "mapping_basis": "Selected dataset research-group folder and the official paper page listing its corresponding data table.",
+      "csv_content_verified": false
+    },
+    {
+      "dataset_id": "race_cz_income",
+      "name": "Commuting Zone Income Rank Statistics by Race and Parent Income Percentile",
+      "csv_filename": "table_4.csv",
+      "paper_id": "race_opportunity",
+      "documentation_filename": "table_4.pdf",
+      "mapping_basis": "Selected dataset research-group folder and the official paper page listing its corresponding data table.",
+      "csv_content_verified": false
+    },
+    {
+      "dataset_id": "college_access_mobility",
+      "name": "Preferred Estimates of Access and Mobility Rates by College",
+      "csv_filename": "mrc_table1.csv",
+      "paper_id": "college_mobility",
+      "documentation_filename": "Codebook-MRC-Table-1.pdf",
+      "mapping_basis": "Selected dataset research-group folder and the official paper page listing its corresponding data table.",
+      "csv_content_verified": false
+    },
+    {
+      "dataset_id": "college_characteristics",
+      "name": "College Level Characteristics from the IPEDS Database and the College Scorecard",
+      "csv_filename": "mrc_table10.csv",
+      "paper_id": "college_mobility",
+      "documentation_filename": "Codebook-MRC-Table-10.pdf",
+      "mapping_basis": "Selected dataset research-group folder and the official paper page listing its corresponding data table.",
+      "csv_content_verified": false
+    }
+  ],
+  "notes": [
+    "Five research papers cover ten dataset tables; each paper should be indexed once.",
+    "Dataset mapping is based on observed research-group folders and official data listings; the selected CSV contents have not yet been downloaded and validated.",
+    "Codebooks and READMEs are held out from the paper retrieval corpus for evaluation.",
+    "Stata .do scripts and the separate life expectancy technical appendix are not included in this collection."
+  ]
+}

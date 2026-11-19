@@ -1,0 +1,82 @@
+{
+  "created_utc": "2026-11-19T23:09:29.250159+00:00",
+  "manifest_sha256": "a093a47c1bbd6941e41081354f851d1d70fa00adc4cbfc01384c60281cfeee14",
+  "dataset_count": 10,
+  "paper_count": 5,
+  "papers": [
+    {
+      "paper_id": "inventors",
+      "title": "Who Becomes an Inventor in America? The Importance of Exposure to Innovation",
+      "source_url": "https://opportunityinsights.org/wp-content/uploads/2019/01/patents_paper.pdf",
+      "resolved_url": null,
+      "pdf_sha256": "197cc53e3f72fd022cf76f649ec08e83dd457bd0904478b1b9d05f54b0cc79f7",
+      "pdf_bytes": 1784345,
+      "page_count": 67,
+      "extracted_characters": 170278,
+      "low_text_pdf_pages": [],
+      "title_verified": true,
+      "status": "extracted"
+    },
+    {
+      "paper_id": "opportunity_atlas",
+      "title": "The Opportunity Atlas: Mapping the Childhood Roots of Social Mobility",
+      "source_url": "https://opportunityinsights.org/wp-content/uploads/2018/10/atlas_paper.pdf",
+      "resolved_url": null,
+      "pdf_sha256": "a44076252e41afd5049a34f366b7bcebb4f2693d5c46004224cba0e4a69cd548",
+      "pdf_bytes": 6842285,
+      "page_count": 119,
+      "extracted_characters": 318210,
+      "low_text_pdf_pages": [],
+      "title_verified": true,
+      "status": "extracted"
+    },
+    {
+      "paper_id": "life_expectancy",
+      "title": "The Association Between Income and Life Expectancy in the United States, 2001-2014",
+      "source_url": "https://sites.bu.edu/geriatricsfellowship/files/2016/05/Income-and-life-expectancy.pdf",
+      "resolved_url": null,
+      "pdf_sha256": "6588ca96027368def9b0f66e47edc56d7993bdf7e3796e489a49468c2be8f1ba",
+      "pdf_bytes": 2220296,
+      "page_count": 17,
+      "extracted_characters": 85662,
+      "low_text_pdf_pages": [],
+      "title_verified": true,
+      "status": "extracted"
+    },
+    {
+      "paper_id": "race_opportunity",
+      "title": "Race and Economic Opportunity in the United States: An Intergenerational Perspective",
+      "source_url": "https://opportunityinsights.org/wp-content/uploads/2018/04/race_paper.pdf",
+      "resolved_url": null,
+      "pdf_sha256": "d18c13da7144d6536c9205a265d09e698391b88b12f8540093d823bd47aceea6",
+      "pdf_bytes": 4722698,
+      "page_count": 108,
+      "extracted_characters": 284801,
+      "low_text_pdf_pages": [],
+      "title_verified": true,
+      "status": "extracted"
+    },
+    {
+      "paper_id": "college_mobility",
+      "title": "Income Segregation and Intergenerational Mobility Across Colleges in the United States",
+      "source_url": "https://opportunityinsights.org/wp-content/uploads/2020/02/coll_mrc_qje_paper.pdf",
+      "resolved_url": null,
+      "pdf_sha256": "14ed24e1a942fd891d89090b318f0ff8ab85fdb43594cde5e5322767a216550d",
+      "pdf_bytes": 2109336,
+      "page_count": 111,
+      "extracted_characters": 314440,
+      "low_text_pdf_pages": [],
+      "title_verified": true,
+      "status": "extracted"
+    }
+  ],
+  "errors": [],
+  "status": "complete",
+  "validation": {
+    "dataset_mapping": "10 unique dataset IDs; 2 per paper",
+    "page_records": "Contiguous page numbers and matching PDF hashes checked for all papers",
+    "cover_check": "All five first pages visually checked for expected title",
+    "cached_rerun": "Passed in Python 3.11 with pinned pypdf and fonttools",
+    "limitation": "Table and equation extraction accuracy not evaluated; CSV contents not validated."
+  }
+}
