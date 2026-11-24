@@ -1,0 +1,194 @@
+{
+  "completed_additional_datasets": 9,
+  "completed_development_pilot": true,
+  "offline_tests_passed": 18,
+  "generation_condition": "CSV baseline versus paper semantic reconciliation; README/codebook/Stata excluded from generation",
+  "audit_verdict_counts": {
+    "needs_revision": 5,
+    "checked_claims_consistent": 2,
+    "partial_support": 2
+  },
+  "interpretation": "Operational and structural checks passed. These are not accuracy scores. Semantic errors remain; manual audit is not blinded.",
+  "datasets": [
+    {
+      "dataset_id": "atlas_county_covariates",
+      "development_case": false,
+      "rows": 3221,
+      "columns": 35,
+      "csv_sha256": "4eb4f2f89292eb8f1d299bf104f870247ec432fe572a46e42fda89ec5ac98416",
+      "checks": {
+        "status_complete": true,
+        "baseline_sample_and_profiles_match": true,
+        "dimensions_match": true,
+        "csv_checksums_match": true,
+        "grounded_code_matches": true,
+        "no_readme_or_stata_generation": true
+      },
+      "accepted_facts": 3,
+      "grounded_llm_calls": 3,
+      "grounded_description": "This dataset contains 3,221 rows and 35 columns. The dataset 'Table 12 Neighborhood Characteristics by County' includes county-level measures of annual average job growth from 2004 to 2013, derived from Local Area Unemployment Statistics (LAUS) employment data (F0) [opportunity_atlas:p55:w360] [opportunity_atlas:p55:w540]. It also contains estimates of high school graduate wage growth, calculated as the log difference between average wages from 2010-2014 and 2005-2009 (F1) [opportunity_atlas:p55:w180]. Additionally, the dataset reports median two-bedroom rent for renter-occupied units paying cash rent, based on American Community Survey data from 2011 to 2015 (F2) [opportunity_atlas:p55:w360].\n"
+    },
+    {
+      "dataset_id": "atlas_county_outcomes",
+      "development_case": false,
+      "rows": 3219,
+      "columns": 64,
+      "csv_sha256": "c355f7cade477637edb57a09b81e11bc102cb61d76a4758bea640590f51a5895",
+      "checks": {
+        "status_complete": true,
+        "baseline_sample_and_profiles_match": true,
+        "dimensions_match": true,
+        "csv_checksums_match": true,
+        "grounded_code_matches": true,
+        "no_readme_or_stata_generation": true
+      },
+      "accepted_facts": 2,
+      "grounded_llm_calls": 3,
+      "grounded_description": "This dataset contains 3,219 rows and 64 columns. The dataset titled 'Table 4 Household Income and Incarceration for Children from Low-Income Households by County, Race, and Gender' includes estimates of incarceration rates for children from low-income households, defined as living in any correctional facility, as of April 1, 2010, based on the 2010 Decennial Census Short Form [opportunity_atlas:p91:w180].\n"
+    },
+    {
+      "dataset_id": "college_access_mobility",
+      "development_case": false,
+      "rows": 2202,
+      "columns": 15,
+      "csv_sha256": "0ccc030b1e91f9372fa4d7b05db971dfc2c842643dce0ec3ad7ad1f5fa9a604d",
+      "checks": {
+        "status_complete": true,
+        "baseline_sample_and_profiles_match": true,
+        "dimensions_match": true,
+        "csv_checksums_match": true,
+        "grounded_code_matches": true,
+        "no_readme_or_stata_generation": true
+      },
+      "accepted_facts": 1,
+      "grounded_llm_calls": 3,
+      "grounded_description": "This dataset contains 2,202 rows and 15 columns. The dataset titled 'Preferred Estimates of Access and Mobility Rates by College' contains estimates of mobility rates, defined as the fraction of students from the bottom parent income quintile reaching the top child income quintile, reflecting both selection and causal effects of colleges [college_mobility:p23:w180] [college_mobility:p98:w180].\n"
+    },
+    {
+      "dataset_id": "college_characteristics",
+      "development_case": false,
+      "rows": 2463,
+      "columns": 49,
+      "csv_sha256": "0a2536cd9a93bdee573b279d5e2aa5fabbc24f3d32386547dc1a910e9d4d594f",
+      "checks": {
+        "status_complete": true,
+        "baseline_sample_and_profiles_match": true,
+        "dimensions_match": true,
+        "csv_checksums_match": true,
+        "grounded_code_matches": true,
+        "no_readme_or_stata_generation": true
+      },
+      "accepted_facts": 6,
+      "grounded_llm_calls": 3,
+      "grounded_description": "This dataset contains 2,463 rows and 49 columns. The dataset includes college-level characteristics from the IPEDS database and the College Scorecard, focusing on various metrics for institutions in the year 2000, such as racial and ethnic shares of undergraduates, graduation rates, and financial measures [college_mobility:p59:w540] [college_mobility:p60:w0] [college_mobility:p60:w180] [college_mobility:p69:w0] [college_mobility:p69:w180]. Racial and ethnic share variables represent the fraction of Asian, Black, and Hispanic undergraduates at a college in 2000, calculated from the IPEDS Fall Enrollment survey [college_mobility:p60:w0] [college_mobility:p60:w180] [college_mobility:p69:w180]. Graduation rates are defined as the percentage of full-time undergraduates graduating within 150% of normal time, based on IPEDS data from 2002 [college_mobility:p69:w180]. Instructional expenditure per student is calculated by dividing total instructional expenditure, excluding operations and maintenance and interest, by total enrollment in 2000 [college_mobility:p60:w0] [college_mobility:p69:w180]. Endowment per student is derived from the ending value of endowment assets in 2000 divided by total undergraduate enrollment in fall 2000 [college_mobility:p60:w0]. Sticker price is defined as the sum of tuition and fees for the academic year 2000-01, sourced from IPEDS [college_mobility:p59:w540] [college_mobility:p69:w180]. The STEM major share indicates the percentage of degrees awarded in science, technology, engineering, and mathematics fields in 2000, as reported by IPEDS [college_mobility:p69:w0] [college_mobility:p69:w180].\n"
+    },
+    {
+      "dataset_id": "inventors_childhood_cz",
+      "development_case": false,
+      "rows": 741,
+      "columns": 140,
+      "csv_sha256": "a61602947f9705dfdb87fd55b9fc42affaa6ef397700f31b712c1fb1a0337b8b",
+      "checks": {
+        "status_complete": true,
+        "baseline_sample_and_profiles_match": true,
+        "dimensions_match": true,
+        "csv_checksums_match": true,
+        "grounded_code_matches": true,
+        "no_readme_or_stata_generation": true
+      },
+      "accepted_facts": 6,
+      "grounded_llm_calls": 3,
+      "grounded_description": "This dataset contains 741 rows and 140 columns. Each child in the dataset is assigned a childhood commuting zone (CZ) based on the ZIP code from their parents' tax return when first claimed as dependents, typically around 1996 (F0) [inventors:p46:w180] [inventors:p59:w0]. The dataset includes children born between 1980 and 1984 whose parents are not inventors, forming an intergenerational sample (F1) [inventors:p46:w180]. Patent rates and inventor shares are measured according to the childhood CZ where the children grew up (F2) [inventors:p46:w0] [inventors:p59:w0]. Data for CZs with fewer than 1,000 children are excluded from the dataset, representing a small fraction of the sample (F3) [inventors:p59:w180]. Highly-cited inventors are defined as those whose patents have citations per co-author in the top 5% of their birth cohort (F4) [inventors:p62:w0] [inventors:p62:w180]. Parent income groupings are established based on percentiles of the parent income distribution (F5) [inventors:p62:w0].\n"
+    },
+    {
+      "dataset_id": "inventors_college",
+      "development_case": false,
+      "rows": 423,
+      "columns": 17,
+      "csv_sha256": "174862d1ebedc009cde7945ac455d476fd7b6e3c39b3e82852ada5b6b94ba4a3",
+      "checks": {
+        "status_complete": true,
+        "baseline_sample_and_profiles_match": true,
+        "dimensions_match": true,
+        "csv_checksums_match": true,
+        "grounded_code_matches": true,
+        "no_readme_or_stata_generation": true
+      },
+      "accepted_facts": 5,
+      "grounded_llm_calls": 3,
+      "grounded_description": "This dataset contains 423 rows and 17 columns. The table provides statistics on patent rates and citations by college, with parent income measured as mean household AGI between 1996-2000 and citations measured as total patent citations between 1996-2014 [inventors:p43:w180] [inventors:p43:w360] [inventors:p6:w180]. Highly-cited patents are defined as those with total citations in the top 5% of the cohort's distribution [inventors:p14:w0]. College attendance is measured at age 20 using 1098-T forms [inventors:p43:w360].\n"
+    },
+    {
+      "dataset_id": "life_county_expectancy",
+      "development_case": true,
+      "rows": 1559,
+      "columns": 49,
+      "csv_sha256": "af9a8ad1f208c10e62079db19b4d01a79c2c15ba668cdd9a98c4ef705f671565",
+      "checks": {
+        "status_complete": true,
+        "baseline_sample_and_profiles_match": true,
+        "dimensions_match": true,
+        "csv_checksums_match": true,
+        "grounded_code_matches": true,
+        "no_readme_or_stata_generation": true
+      },
+      "accepted_facts": 2,
+      "grounded_llm_calls": 3,
+      "grounded_description": "This dataset contains 1,559 rows and 49 columns. The dataset titled 'County Life Expectancy by Gender and Income Quartile' includes life expectancy estimates grouped by income quartiles, which categorize individuals based on their income levels [life_expectancy:p4:w0] [life_expectancy:p5:w0]. The paper's race-adjusted estimates use race-and-ethnicity adjustment procedures for calculating life expectancy, specifically for 40-year-olds computed by income ventile [life_expectancy:p4:w0] [life_expectancy:p7:w180]. Life expectancy estimates are derived from health behaviors measured by income quartile, utilizing data from the Behavioral Risk Factor Surveillance Surveys from 1996 through 2008 [life_expectancy:p4:w0] [life_expectancy:p5:w0].\n"
+    },
+    {
+      "dataset_id": "life_national_mortality",
+      "development_case": false,
+      "rows": 85400,
+      "columns": 8,
+      "csv_sha256": "191d50519fda18a2db40027725dded39d1a9305908d45b3945e3fc75285cd3e4",
+      "checks": {
+        "status_complete": true,
+        "baseline_sample_and_profiles_match": true,
+        "dimensions_match": true,
+        "csv_checksums_match": true,
+        "grounded_code_matches": true,
+        "no_readme_or_stata_generation": true
+      },
+      "accepted_facts": 5,
+      "grounded_llm_calls": 3,
+      "grounded_description": "This dataset contains 85,400 rows and 8 columns. The dataset includes national mortality rates categorized by gender, age, year, and income percentile, with income for individuals aged 63 or older measured at age 61, while for those aged 63 or younger, mortality rates are based on income percentile from 2 years earlier [life_expectancy:p2:w180] [life_expectancy:p2:w360] [life_expectancy:p3:w0] [life_expectancy:p3:w180]. Observations with an income of $0 are excluded due to unreliable mortality tracking, ensuring the dataset reflects more accurate mortality rates [life_expectancy:p2:w180]. Mortality rates are estimated for ages 40 to 76, with extrapolation beyond 76 using Gompertz models, which account for the exponential increase in mortality rates with age [life_expectancy:p2:w180] [life_expectancy:p2:w360]. The paper's race- and ethnicity-adjusted estimates control for group composition differences across income percentiles, enhancing the reliability of the mortality estimates [life_expectancy:p2:w360] [life_expectancy:p3:w0].\n"
+    },
+    {
+      "dataset_id": "race_cz_income",
+      "development_case": false,
+      "rows": 741,
+      "columns": 21,
+      "csv_sha256": "4e8f7f9c6664f560a3fc4a51716f796c72db99eb1badeda901db04c144178ebf",
+      "checks": {
+        "status_complete": true,
+        "baseline_sample_and_profiles_match": true,
+        "dimensions_match": true,
+        "csv_checksums_match": true,
+        "grounded_code_matches": true,
+        "no_readme_or_stata_generation": true
+      },
+      "accepted_facts": 5,
+      "grounded_llm_calls": 3,
+      "grounded_description": "This dataset contains 741 rows and 21 columns. Each row represents a commuting zone (CZ) assigned based on where children grew up before age 23, with children assigned to CZs in proportion to the time spent below age 23 in each CZ (F0, F2) [race_opportunity:p27:w0]. Income ranks are measured in the national income distribution for both children and parents (F3) [race_opportunity:p27:w0] [race_opportunity:p27:w180]. Upward mobility is defined as the predicted individual income rank in adulthood for children with parents at the 25th income percentile (F1) [race_opportunity:p87:w0] [race_opportunity:p90:w180]. The analysis sample includes children observed between ages 31-37 in 2014-15 (F4) [race_opportunity:p87:w180].\n"
+    },
+    {
+      "dataset_id": "race_national_statistics",
+      "development_case": false,
+      "rows": 100,
+      "columns": 69,
+      "csv_sha256": "a223bdae32eb9c1649786ee97d3d6fcdf498e552b3ac131299c780873bc74760",
+      "checks": {
+        "status_complete": true,
+        "baseline_sample_and_profiles_match": true,
+        "dimensions_match": true,
+        "csv_checksums_match": true,
+        "grounded_code_matches": true,
+        "no_readme_or_stata_generation": true
+      },
+      "accepted_facts": 2,
+      "grounded_llm_calls": 3,
+      "grounded_description": "This dataset contains 100 rows and 69 columns. Children are grouped by their parents' income percentile for intergenerational comparisons, with upward mobility measured as children's income rank regressed on parent income rank within race-gender groups [race_opportunity:p86:w0] [race_opportunity:p86:w180] [race_opportunity:p88:w0].\n"
+    }
+  ]
+}

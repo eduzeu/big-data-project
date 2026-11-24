@@ -1,0 +1,21 @@
+{
+  "purpose": "Development pilot plus nine additional dataset checks; descriptive audit, not a blinded benchmark",
+  "generation_inputs": "CSV, mapped research paper; no codebook, README or Stata context",
+  "development_case": "life_county_expectancy",
+  "checks": [
+    "Row/column counts agree with the complete CSV",
+    "Baseline and grounded generation reuse identical CSV sample and content profile",
+    "Quoted evidence and citation IDs validate",
+    "Describe the table's observation unit rather than every geography in the study",
+    "Do not confuse income quartiles, quintiles and percentiles",
+    "Do not transfer study-level numerical findings to CSV fields",
+    "Distinguish subset-specific adjustment from blanket adjustment claims",
+    "Compare substantive description claims with the separately held-out table codebook"
+  ],
+  "reporting": "Separate operational completion, structural validation, factual errors and missing information. Missing detail is not proof of an incorrect claim; passing citation checks is not proof of semantic accuracy.",
+  "pilot_codebook_correction": {
+    "source": "health_ineq_online_table_11_readme.pdf, pages 1-2",
+    "verified_wording": "County-level life expectancy at age 40 is reported for men and women by national income quartile, with both race-adjusted and unadjusted estimates and their standard errors.",
+    "scope": "Manual reference correction only; the codebook is excluded from model requests. The main paper alone does not establish the unadjusted column mapping."
+  }
+}

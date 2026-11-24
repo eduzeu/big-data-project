@@ -18,6 +18,15 @@ FACTS={'facts':[{'columns':['cty'],'interpretation':'County identifier',
        'unresolved_columns':['x']}
 
 class EvidenceTests(unittest.TestCase):
+    def test_blanket_adjustment_regression(self):
+        from grounded_generation import validate_adjustment_scope
+        for text in ['Life expectancy estimates are adjusted for race.',
+                     'The estimates were adjusted for ethnic composition.']:
+            with self.assertRaises(ValueError):
+                validate_adjustment_scope(text)
+        validate_adjustment_scope("The paper reports race-adjusted estimates controlling for racial composition.")
+        validate_adjustment_scope("Race-adjusted and unadjusted estimates are included.")
+
     def test_exact_quote_and_column_coverage(self):
         self.assertEqual(validate_facts(FACTS,['cty','x'],HITS),FACTS)
         for change in ['fabricated_quote','unknown_id','unknown_column','unaccounted_column','both_unresolved']:

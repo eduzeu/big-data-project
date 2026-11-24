@@ -1,0 +1,124 @@
+{
+  "audit_type": "Post-generation comparison with held-out codebooks; manually reviewed, not blinded",
+  "results": [
+    {
+      "dataset_id": "inventors_college",
+      "verdict": "needs_revision",
+      "issues": [
+        "Generated college attendance at age 20; table codebook defines institution attended for the greatest amount of time in the four calendar years when the child turned 19-22.",
+        "Generated definition concerns highly-cited patents; the table codebook defines highly-cited inventors as the top 5% of inventors by citations within birth cohort."
+      ],
+      "reference": "Inventors-Codebook-Table-3.pdf, page 1",
+      "note": "Paper and codebook versions may differ; cited paper support does not settle a table-specific definition. No codebook corrections were fed back into this test generation."
+    },
+    {
+      "dataset_id": "atlas_county_covariates",
+      "verdict": "checked_claims_consistent",
+      "issues": [],
+      "coverage_gaps": [
+        "Description covers only three of the 35 fields.",
+        "Inherited folder label says Table 12; supplied codebook calls this Table 10."
+      ],
+      "reference": "Codebook-for-Table-10.pdf, annual job growth / ln_wage_growth_hs_grad / rent_twobed2015 entries",
+      "note": "The three stated measures, periods and sources agree with the held-out codebook. This is a limited claim audit, not complete schema coverage."
+    },
+    {
+      "dataset_id": "inventors_childhood_cz",
+      "verdict": "needs_revision",
+      "issues": [
+        "Claims parents are not inventors; the supplied table codebook does not impose that restriction.",
+        "Claims CZs with fewer than 1,000 children are excluded; table codebook states cells with fewer than 250 children are omitted.",
+        "Describes child-level assignments without clearly stating one row per childhood CZ."
+      ],
+      "reference": "Inventors-Codebook-Table-1.pdf, pages 1-2"
+    },
+    {
+      "dataset_id": "life_national_mortality",
+      "verdict": "needs_revision",
+      "issues": [
+        "Age 63 is placed in both income-measurement categories. Codebook and observed lag field establish a two-year lag for ages 40-63, and income at age 61 for ages 64-76.",
+        "Conflates paper-level life expectancy adjustment/extrapolation with the observed mortality table; this CSV contains ages 40-76 only.",
+        "Adds unsupported promotional wording about enhancing reliability."
+      ],
+      "reference": "health_ineq_online_table_15_readme.pdf, page 1; age_at_d / lag in actual CSV"
+    },
+    {
+      "dataset_id": "atlas_county_outcomes",
+      "verdict": "checked_claims_consistent",
+      "issues": [],
+      "coverage_gaps": [
+        "Only the incarceration definition is explained; parent income at percentile 25, income outcomes, and 1978-1983 cohorts are omitted.",
+        "Inherited folder label says Table 4; supplied codebook calls this Table 2."
+      ],
+      "reference": "Codebook-for-Table-2.pdf, incarceration definition",
+      "note": "Limited claim consistency, not a complete table description."
+    },
+    {
+      "dataset_id": "race_cz_income",
+      "verdict": "partial_support",
+      "issues": [],
+      "supported": [
+        "Correct one-row-per-CZ unit; baseline incorrectly called these cities.",
+        "National income ranks and predicted adult rank at parent percentile 25 agree with the codebook."
+      ],
+      "coverage_gaps": [
+        "Parent percentile 75, household income ranks and population fields are omitted.",
+        "Age-based assignment, proportional exposure and measurement-age statements require checking the referred paper sections; the table codebook alone does not establish them."
+      ],
+      "reference": "table_4.pdf, description and variable definitions"
+    },
+    {
+      "dataset_id": "race_national_statistics",
+      "verdict": "partial_support",
+      "issues": [
+        "Description focuses on a regression-based study method; the CSV is percentile-level outcome summaries, so it does not clearly explain the stored measurements."
+      ],
+      "supported": [
+        "Grouping by parent income percentile and race/gender agrees with the table codebook."
+      ],
+      "coverage_gaps": [
+        "Does not identify the 1978-1983 cohorts or explain the outcome columns.",
+        "Does not explicitly state one row per parent income percentile."
+      ],
+      "reference": "table_1.pdf, description and codebook"
+    },
+    {
+      "dataset_id": "college_access_mobility",
+      "verdict": "needs_revision",
+      "issues": [
+        "Mobility-rate wording leaves the denominator ambiguous and can be read as the conditional success rate. mr_kq5_pq1 is the percent of all students with bottom-quintile parents AND top-quintile adult income; kq5_cond_parq1 is the separate conditional rate."
+      ],
+      "coverage_gaps": [
+        "Only one measure is explained; access rates, median incomes, trends and college assignment are omitted."
+      ],
+      "reference": "Codebook-MRC-Table-1.pdf, mr_kq5_pq1 versus kq5_cond_parq1"
+    },
+    {
+      "dataset_id": "college_characteristics",
+      "verdict": "needs_revision",
+      "issues": [
+        "Calls exp_instr instructional expenditure per student; supplied codebook describes Total Instructional Expenditures, so the unit/denominator mapping is not established.",
+        "Calls asian_or_pacific_share_fall_2000 an Asian share, omitting Pacific Islanders."
+      ],
+      "supported": [
+        "The graduation-rate period, 150%-of-normal-time measure, sticker price components and STEM-major share broadly agree with the codebook."
+      ],
+      "coverage_gaps": [
+        "Emphasizes 2000 and omits the 2013 measures and college-group row definition."
+      ],
+      "reference": "Codebook-MRC-Table-10.pdf, exp_instr_[YEAR] and asian_or_pacific_share_fall_2000"
+    }
+  ],
+  "pilot": {
+    "dataset_id": "life_county_expectancy",
+    "verdict": "needs_revision",
+    "adjustment_wording": "Fixed: generated text refers to the paper\u2019s adjusted estimates rather than assigning adjustment status to all CSV estimates.",
+    "remaining_errors": [
+      "Default-query description introduces a false claim that life expectancy is derived from BRFSS health behaviors.",
+      "Matched-query rerun describes county, CZ and state estimates and income ventiles as table contents, although the CSV is county-level and uses quartiles.",
+      "Matched-query rerun mentions across-area standard deviation; this must not be interpreted as the sd_le fields, which are standard errors."
+    ],
+    "manual_reference_correction": "papers/pilot_reviewed_description.md",
+    "note": "Both unsuccessful descriptions are preserved. Neither is a validated replacement for the reviewed reference description."
+  }
+}

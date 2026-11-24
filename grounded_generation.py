@@ -17,6 +17,11 @@ its purpose, geographic units, population, measurement conditions, grouping
 variables, conditioning age/time period, and adjustment distinctions. Do not try to
 explain every column. Use columns=[] for supported table-wide facts; a paper is not
 a codebook, so do not force its discussion into exact field mappings.
+Adjustment status must have explicit scope. A paper's adjusted results do not
+establish that every estimate in the CSV is adjusted. Unless exact field mappings
+are supported, phrase adjustment facts as "The paper's race-adjusted estimates ..."
+(or the relevant adjustment), never "The estimates are adjusted ...". Do not infer
+unadjusted counterparts from column prefixes alone. Omit unsupported distinctions.
 Do not invent expansions or infer statistical definitions from column prefixes.
 Do not transfer an unrelated study statistic to a CSV field. If the paper does not
 establish a specific field's meaning, omit that mapping. Do not claim every study
@@ -47,6 +52,9 @@ column. If the quote supports just part of a multi-part statement, reject the fa
 Reject unsupported abbreviations, statistical meanings inferred from prefixes,
 and transfers of study-wide conclusions to a specific table without evidence.
 A narrow general measurement condition may use columns=[] when applicable.
+Reject unqualified adjustment claims about all estimates when the evidence only
+explains the paper's adjusted analysis. Mixed adjusted/unadjusted column families
+require separate evidence for their meanings; do not assume all share one status.
 Be conservative. Do not rewrite facts or add new ones.
 Return JSON {"verdicts": [{"fact_index": 0, "supported": true,
 "reason": "brief justification"}, ...]} covering every fact exactly once.
@@ -71,9 +79,20 @@ markers yourself: code will attach the source IDs. Do not restate row/column cou
 code adds that factual introduction. Prioritize the supported conditioning age/time, grouping dimensions and geographic
 units. Describe the table itself; do not add study-wide trends or numerical findings
 that are not fields in the CSV. Mention adjustment only for the applicable subset
-of estimates. Use only the grouping resolution appropriate to the dataset label.
+of estimates. For paper-level adjustment facts, explicitly say "The paper's
+race-adjusted estimates" (using the supported adjustment) and preserve that scope.
+Never imply that other CSV estimates have the same adjustment status. Do not add
+"unadjusted" unless an accepted fact explicitly establishes that distinction.
+Use only the grouping resolution appropriate to the dataset label.
 Do not introduce facts absent from the accepted interpretations.
 """
+
+
+def validate_adjustment_scope(text):
+    """Reject the known blanket wording; semantic review still checks other claims."""
+    if re.search(r"(?i)\b(?:life expectancy )?estimates (?:are|were) adjusted\b", text):
+        raise ValueError("Name the adjusted subset or say 'The paper reports adjusted estimates'; do not assign adjustment status to every CSV estimate")
+    return text
 
 
 def normalize(text):
@@ -177,6 +196,7 @@ def validate_proposals(value, columns, hits, catalog=None):
             raise ValueError('Column names must be strings')
         if not isinstance(fact.get('interpretation'),str) or len(fact['interpretation'].split())>25:
             raise ValueError('Use at most 25 words per atomic interpretation')
+        validate_adjustment_scope(fact['interpretation'])
         if catalog is not None:
             if set(fact)!={'columns','interpretation','evidence_ids'}:
                 raise ValueError('Facts must contain columns, interpretation and evidence_ids')
@@ -265,6 +285,7 @@ def render_sentences(value, facts, rows, columns):
             raise ValueError('Use plain sentence text; code adds the citations')
         if not isinstance(indices,list) or not indices or not all(isinstance(i,str) and i in ids_by_name for i in indices):
             raise ValueError('Each sentence must select IDs from: '+', '.join(ids_by_name))
+        validate_adjustment_scope(text)
         used_facts.update(indices)
         ids=sorted({e['chunk_id'] for i in indices for e in ids_by_name[i]['evidence']})
         cited=text.strip().rstrip('.')+' '+ ' '.join(f'[{ident}]' for ident in ids)+'.'

@@ -244,3 +244,30 @@ python -m unittest test_grounded_generation test_paper_retrieval -v
 The tests cover fabricated excerpts/IDs, missing citations, unresolved columns,
 input parity, overwrite protection, bounded repair, and isolation of the original
 guesses from the new model requests. They make no provider calls.
+
+### Validate the remaining datasets
+
+`run_validation.py` locates the ten selected CSVs by their manifest filenames,
+records input and code checksums, and runs separate baseline/grounded pairs with
+at most two datasets in flight. Keep filenames unchanged and store each CSV once
+under the input directory. It asks for an API key privately if the environment
+variable is unset. The key is not written to an output file.
+
+```bash
+python run_validation.py --data-root /path/to/downloaded/Datasets --output papers/local/dataset_validation --generate
+```
+
+For the existing county life-expectancy pilot, add
+`--pilot-baseline /path/to/original/baseline` to reuse the preserved baseline.
+Omit `--generate` for a no-cost input inventory. Completed stages are preserved;
+failed grounded stages require a fresh output directory before retrying.
+`plan.json`, per-dataset logs and `results.json` distinguish completed runs from
+failures. Codebooks remain outside all generation requests. See
+`papers/validation_criteria.json` for the audit criteria and the separately verified
+pilot reference wording.
+
+Adjustment claims now preserve the scope of the paper's adjusted analysis. A
+paper describing race adjustment does not establish that every CSV estimate is
+adjusted, or identify unadjusted fields by itself. The blanket wording from the
+pilot is rejected during fact validation and final rendering. This targeted check
+and the model's evidence review do not replace a table-specific factual audit.
