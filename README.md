@@ -115,8 +115,7 @@ the collector are shared so teammates can recreate the corpus. The committed
 `papers/extraction_summary.json` records the verified collection, without full text.
 Text extraction checks confirm usable text, not perfect recovery of tables or equations.
 
-Next: split these pages into passages, index them, and test retrieval with questions
-about each dataset before connecting retrieved passages to AutoDDG.
+The retrieval and description adapters built on this corpus are described below.
 
 ## Search papers and prepare enriched descriptions
 
@@ -175,3 +174,73 @@ python -m unittest discover -s . -p test_paper_retrieval.py -v
 The generation integration test uses a mocked model, so it checks that evidence is
 passed through without making paid API calls. Local indexes, downloaded datasets,
 and run outputs remain outside Git.
+
+## Reconcile evidence before generating a description
+
+`run_grounded.py` is an experimental adapter around the saved AutoDDG baseline.
+The first live pilot showed that adding passages to the content profile alone did
+not correct wrong semantic guesses. This adapter adds three explicit model stages:
+
+1. Extract source-supported meanings from the paper and the CSV column names,
+   independently of the baseline guesses to avoid anchoring on their errors.
+   The model selects numbered source excerpts; code inserts their original text
+   and passage references, so the model cannot invent a quote. Up to six atomic supported facts are requested; unresolved columns are computed by code.
+2. Review each interpretation against its quoted excerpts and reject unsupported
+   mappings. If none survive, stop rather than generate a description.
+3. Generate the description from the dataset label, dimensions, and accepted facts.
+   Raw profiles and unresolved column names are excluded from the final request.
+   The original semantic guesses are excluded from this final request. Paper claims
+   must reference accepted fact IDs; code inserts the corresponding inline
+   citations and constructs the claim list.
+
+The excerpt catalog removes duplicate overlap text and selects up to 30 spans by
+query relevance, favoring definitions over chart fragments. Source IDs are selected
+by the model; quotes and final citations are attached programmatically.
+
+The retriever also includes adjacent windows on each selected page so definitions
+cut at passage boundaries are available. This changes evidence coverage relative
+to the first pilot; it must be reported as part of the experimental condition.
+
+The adapter checks JSON structure, column coverage, quoted-excerpt provenance, and
+citation IDs. It permits one repair attempt per stage and fails without creating a
+successful description if validation still fails. These checks **do not establish
+semantic entailment**: a real excerpt can still be misinterpreted, so factual review
+and independent evaluation remain necessary.
+
+First generate a CSV-only baseline in its own directory:
+
+```bash
+python run_baseline.py --csv data/health_ineq_online_table_11.csv --output papers/local/paired_baseline --generate --prompt-for-key
+```
+
+Then reuse that baseline:
+
+```bash
+python run_grounded.py --csv data/health_ineq_online_table_11.csv --dataset-id life_county_expectancy --baseline-dir papers/local/paired_baseline --output papers/local/reconciled --paper-query "life expectancy county income quartile age 40 estimation" --generate --prompt-for-key
+```
+
+Omit `--generate --prompt-for-key` to prepare the inputs without making API calls.
+Choose a new empty output directory for every run. The runner verifies the CSV
+checksum, row/column counts and sampled rows against the baseline, and reuses its
+model. Its original semantic profile is preserved for comparison, but excluded
+from all new model requests. Baseline and first enriched-run artifacts are
+preserved. Fact extraction defaults to `gpt-4.1` and support review to `gpt-5.1` with medium
+reasoning effort (override with `--reconciliation-model` and `--review-model`); final description generation uses the original baseline
+model. This stronger review stage adds API cost, and model-based support review can
+still make mistakes. This changes the generation prompts and adds reconciliation and support-review calls; it
+is a new experimental condition, not the unmodified upstream AutoDDG generator.
+
+Saved artifacts include `reconciled_semantics.json`, `evidence_review.json`,
+`accepted_semantics.json`, `grounded_description.json`,
+`excerpt_catalog.json`, the description, exact requests and raw responses, validation records, retrieved
+passages and generation metadata. Keep outputs local: they contain paper excerpts.
+Codebooks/READMEs remain excluded from generation; they can be consulted separately
+for post-run evaluation. No dataset-specific correction dictionary is injected.
+
+```bash
+python -m unittest test_grounded_generation test_paper_retrieval -v
+```
+
+The tests cover fabricated excerpts/IDs, missing citations, unresolved columns,
+input parity, overwrite protection, bounded repair, and isolation of the original
+guesses from the new model requests. They make no provider calls.

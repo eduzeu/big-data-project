@@ -1,0 +1,36 @@
+{
+  "dataset_id": "life_county_expectancy",
+  "rows": 1559,
+  "columns": 49,
+  "successful_development_run": "reconciled_v12",
+  "offline_tests_passed": 17,
+  "baseline_description_model": "gpt-4o-mini",
+  "final_description_model": "gpt-4o-mini",
+  "fact_extraction_model": "gpt-4.1",
+  "support_review_model": "gpt-5.1",
+  "same_csv_sample_and_profile": true,
+  "original_baseline_preserved": true,
+  "anchor_passages": 4,
+  "context_passages": 9,
+  "source_excerpts": 30,
+  "accepted_facts": 6,
+  "unresolved_column_count": 49,
+  "targeted_manual_checks": {
+    "income_grouping": "Income quartiles; no quarters confusion",
+    "geography": "Counties and commuting zones; no city confusion",
+    "age_condition": "Expected age at death for 40-year-olds",
+    "uncertainty": "No unsupported cross-area-standard-deviation statement",
+    "citations": "Inserted from known fact/passage IDs; quotes checked against source"
+  },
+  "evaluation_reference": "https://opportunityinsights.org/wp-content/uploads/2018/04/health_ineq_online_table_11_readme.pdf",
+  "reference_use": "Development/evaluation reference only; never supplied to generation or review calls",
+  "remaining_limitations": [
+    "Adjusted and unadjusted estimates are not clearly distinguished in the description.",
+    "The county row grain is not explained as clearly as the commuting-zone identifiers.",
+    "Exact column meanings remain unresolved unless directly supported by the paper.",
+    "This is a targeted development check on one known dataset, not a blind benchmark or proof of general improvement.",
+    "This condition changes prompts, source context and review models; it does not isolate the effect of one component."
+  ],
+  "llm_calls_in_successful_run": 3,
+  "credential_scan": "passed"
+}
