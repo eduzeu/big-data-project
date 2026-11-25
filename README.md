@@ -271,3 +271,64 @@ paper describing race adjustment does not establish that every CSV estimate is
 adjusted, or identify unadjusted fields by itself. The blanket wording from the
 pilot is rejected during fact validation and final rendering. This targeted check
 and the model's evidence review do not replace a table-specific factual audit.
+
+### Table-specific accuracy path
+
+`run_strict.py` is a separate experimental condition that preserves the previous
+runner and results. It reuses completed baselines and fuses three complementary
+BM25 queries: the dataset label with measurement terms, the label with online-table
+terms, and a bounded field-token query. Folder table numbers are removed from
+queries because some supplied folder labels disagree with their codebooks.
+Reciprocal-rank fusion selects 12 anchors; same-page neighboring windows retain
+split definitions. The candidate catalog has up to 96 exact excerpts.
+
+Each candidate must cite evidence for its meaning **and** its connection to the
+specific CSV. Review checks definition, table linkage, units/denominator and schema
+consistency separately. An independent final audit reviews surviving claims and
+can reject them again. An approval cannot override a failed component check.
+There is no final paraphrasing model: code renders approved sentences verbatim,
+attaching citations. This prevents the final writing stage from introducing new
+claims; it does not prove that a reviewer approved a true claim. Unsupported
+meanings can remain unresolved. A run with no accepted claims records `abstained`,
+not semantic success.
+
+```bash
+python run_strict.py --previous-results /path/to/results/dataset_validation --output papers/local/strict_validation --generate
+```
+
+Use a fresh output root. Add `--dataset-id DATASET_ID` (repeatable) for selected
+cases; omit `--generate` to prepare without API calls. CSV files must be under
+`data/`, unchanged from the saved baselines. The key is read privately if it is not
+already in the environment. Extraction uses `gpt-4.1`; both audits use `gpt-5.1`.
+Samples/profiles, exact requests, provider responses, decisions, source excerpts,
+code/input hashes and limitations remain local. Codebooks/READMEs and Stata files
+are still excluded from generation. These reruns follow error inspection and are
+not a blinded benchmark.
+
+[Reviewed reference descriptions](papers/reviewed_descriptions/README.md) use the
+supplied codebooks to correct all ten descriptions. They are explicitly separate
+from paper-only model outputs and are not model-accuracy evidence.
+
+```bash
+python -m unittest test_strict_generation test_grounded_generation test_paper_retrieval -v
+```
+
+### Documentation-assisted descriptions (different inputs)
+
+For a usable description when the paper does not establish a field definition,
+`run_documented.py` adds the table's supplied PDF documentation. It verifies a
+unique CSV/documentation pairing in the same downloaded source folder and records
+both checksums. Documentation has a separate citation namespace and is explicitly
+preferred over conflicting paper figure or regression definitions. Both reviews
+see the complete short table documentation. Approved text is rendered verbatim.
+
+```bash
+python run_documented.py --previous-results /path/to/results/dataset_validation --inputs /path/to/data/validation_sources --output papers/local/documented_validation
+```
+
+This command makes API calls and privately requests a key if needed. Use a fresh
+output directory; optional `--dataset-id` selects cases. Metadata explicitly sets
+`used_readme_context=true` and `used_table_documentation=true`. **This condition
+uses former reference documentation as input. Agreement with it is a source
+consistency check, not held-out accuracy or a paper-only improvement.** All older
+baselines and paper-only outputs remain intact. Stata files are not used.
