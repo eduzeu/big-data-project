@@ -13,6 +13,27 @@ def verdict(**overrides):
             'units_and_denominator_supported':True,'schema_consistent':True,**overrides}
 
 class StrictTests(unittest.TestCase):
+    def test_field_templates_are_preserved(self):
+        value=copy.deepcopy(CANDIDATE)
+        value['claims'][0]['text']='The _pq_[1-5] fields, kir_[race]_[gender]_p[pctile], and [race]_[gender]_count use field templates.'
+        claims=validate_claims(value,['exp_instr_2000'],CATALOG)['claims']
+        self.assertEqual(claims[0]['text'],value['claims'][0]['text'])
+
+    def test_citations_cannot_hide_as_field_templates(self):
+        for marker in ['[E0000]','[paper:p1:w0]','_[E0000]','_[F0]','_[paper:p1:w0]']:
+            value=copy.deepcopy(CANDIDATE)
+            value['claims'][0]['text']='The measure is supported '+marker
+            with self.subTest(marker=marker),self.assertRaises(ValueError):
+                validate_claims(value,['exp_instr_2000'],CATALOG)
+
+    def test_excerpt_id_padding_normalizes_without_inventing_sources(self):
+        value=copy.deepcopy(CANDIDATE)
+        value['claims'][0]['meaning_evidence_ids']=['E0']
+        result=validate_claims(value,['exp_instr_2000'],CATALOG)
+        self.assertEqual(result['claims'][0]['meaning_evidence_ids'],['E0000'])
+        value['claims'][0]['meaning_evidence_ids']=['E99']
+        with self.assertRaises(ValueError):validate_claims(value,['exp_instr_2000'],CATALOG)
+
     def test_missing_table_link_rejected(self):
         bad=copy.deepcopy(CANDIDATE);bad['claims'][0]['table_evidence_ids']=[]
         with self.assertRaises(ValueError):validate_claims(bad,['exp_instr_2000'],CATALOG)

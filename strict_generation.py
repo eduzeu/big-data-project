@@ -110,17 +110,27 @@ def validate_claims(value, columns, catalog):
     for c in value['claims']:
         if not isinstance(c,dict) or set(c)!={'text','columns','meaning_evidence_ids','table_evidence_ids'}:
             raise ValueError('Invalid claim fields')
-        if not isinstance(c['text'],str) or not c['text'].strip() or len(c['text'].split())>40 or '[' in c['text'] or ']' in c['text']:
-            raise ValueError('Use 1-40 words of plain claim text, without citation markers')
+        text=c['text']
+        if not isinstance(text,str) or not text.strip() or len(text.split())>40:
+            raise ValueError('Use 1-40 words of claim text')
+        # Codebook field templates use suffixes such as _[race] and _[1-5].
+        # These are variable notation, not source IDs. Keep them verbatim while
+        # rejecting free-standing brackets and citation-like IDs, including E/F IDs.
+        without_templates=re.sub(r'(?:(?<=\w)\[(?![EF]\d+\])[-A-Za-z0-9_]+\]|\[(?![EF]\d+\])[-A-Za-z0-9_]+\](?=_))', '', text)
+        if '[' in without_templates or ']' in without_templates:
+            raise ValueError('Do not write citation markers; only inline field templates are allowed')
         validate_adjustment_scope(c['text'])
         if not isinstance(c['columns'],list) or not all(isinstance(x,str) and x in columns for x in c['columns']):
             raise ValueError('Only actual CSV columns may be named')
         result=dict(c)
         for field in ['meaning_evidence_ids','table_evidence_ids']:
             ids=c[field]
+            if isinstance(ids,list):
+                ids=[f'E{int(i[1:]):04d}' if isinstance(i,str) and re.fullmatch(r'E[0-9]+',i) else i for i in ids]
+            result[field]=ids
             if not isinstance(ids,list) or not ids or not all(isinstance(x,str) and x in sources for x in ids):
                 raise ValueError('Both semantic meaning and table linkage require valid excerpt IDs')
-        ids=set(c['meaning_evidence_ids']+c['table_evidence_ids'])
+        ids=set(result['meaning_evidence_ids']+result['table_evidence_ids'])
         result['evidence']=[sources[i] for i in sorted(ids)]
         claims.append(result)
     return {'claims':claims,'limitations':value['limitations']}

@@ -36,6 +36,8 @@ def run_one(dataset,baseline,output,key=None,generate=False):
                 final_rendering='Verbatim approved claims; no free-form generation after final audit',
                 note='Development rerun after inspecting previous failures; not a blinded benchmark. Codebook/README/Stata excluded from generation.')
     payload.pop('tentative_semantic_guesses',None);payload.pop('paper_passages',None)
+    payload['dataset_file']=csv.name
+    payload['mapped_paper_id']=dataset['paper_id']
     payload['observed_profile']=(baseline/'content_profile.md').read_text()
     output.joinpath('reconciliation_payload.json').write_text(json.dumps(payload,indent=2))
     output.joinpath('retrieved_passages.json').write_text(json.dumps(hits,indent=2))

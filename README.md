@@ -332,3 +332,10 @@ output directory; optional `--dataset-id` selects cases. Metadata explicitly set
 uses former reference documentation as input. Agreement with it is a source
 consistency check, not held-out accuracy or a paper-only improvement.** All older
 baselines and paper-only outputs remain intact. Stata files are not used.
+
+The completed development results, remaining draft errors and correction to the
+previous expenditure audit are documented in
+[DESCRIPTION_ACCURACY.md](papers/DESCRIPTION_ACCURACY.md). All ten corrected
+reference descriptions are available separately. Model-approved drafts still need
+factual review; the two input conditions must not be combined into an accuracy
+score.
