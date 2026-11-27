@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "scope": "Four targeted semantic checks per dataset; not a complete claim audit or overall accuracy benchmark",
+  "annotation_method": "Codex source-based review; no independent human rater, blinding, or preregistration",
+  "conditions": ["csv_baseline", "strict_paper_only", "documentation_assisted"],
+  "labels": {
+    "supported": "Target meaning is clearly and correctly expressed",
+    "partial": "A valid part of the target is present but important detail is absent",
+    "omitted": "Target meaning is not described",
+    "incorrect": "Text contradicts the target definition or observation unit",
+    "ambiguous": "Wording admits materially different statistical interpretations",
+    "abstained": "Run explicitly withheld all semantic claims"
+  },
+  "documentation_rule": "Documentation is held out of baseline and strict paper-only requests but was inspected during development. It is generation input for documented outputs; their annotations measure source consistency, not held-out performance.",
+  "selection_rule": "Reuse preserved successful runs; make one fresh, unchanged-condition verification run for each of the two previously flagged documented datasets. Preserve both old and fresh outputs; no best-of selection.",
+  "datasets": {
+    "inventors_college": ["college row unit", "inventor shares and patent/citation totals rather than counts of filings in five periods", "parent income quintiles", "college assigned by most attendance in ages 19-22"],
+    "inventors_childhood_cz": ["childhood CZ row unit rather than cities", "share of children becoming inventors", "parent income quintiles", "highly cited inventor ranking rather than patent ranking"],
+    "atlas_county_covariates": ["county row unit rather than mixed counties/cities", "income and poverty measures", "variable-specific measurement periods", "generally population-weighted tract aggregation with exceptions"],
+    "atlas_county_outcomes": ["county row unit rather than mixed city/state rows", "household income rank conditional on parent percentile 25", "race and gender groupings", "incarceration measured April 1, 2010"],
+    "life_national_mortality": ["aggregated mortality cell rather than individual record", "gender-age-year-income-percentile cell grouping", "mortality rate denominator is beginning-of-year count", "income lag two years at ages 40-63 and income at age 61 for ages 64-76"],
+    "life_county_expectancy": ["county row unit rather than city/CZ/state observations", "income quartiles rather than calendar quarters", "both adjusted and unadjusted estimates", "uncertainty fields are standard errors"],
+    "race_national_statistics": ["one row per parent income percentile", "1978-1983 birth cohorts", "race and gender groupings", "adult household income ranks rather than demographic densities"],
+    "race_cz_income": ["CZ row unit rather than cities", "adult individual and household income ranks", "predictions at parent income percentiles 25 and 75", "2000 Census population counts"],
+    "college_access_mobility": ["college reporting unit", "bottom parent income quintile rather than quartile", "joint mobility share of all students versus conditional success rate", "per-household five-year income average versus across-student median"],
+    "college_characteristics": ["college or college-group row unit", "correct field-specific expenditure units: exp_instr_pc is per student; exp_instr is total", "Asian OR Pacific Islander coverage when describing that share", "graduation within 150% of normal time"]
+  }
+}

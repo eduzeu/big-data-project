@@ -1,0 +1,790 @@
+{
+  "annotation_method": "Codex source-based review; no independent human rater, blinding, or preregistration",
+  "conditions": [
+    "csv_baseline",
+    "strict_paper_only",
+    "documentation_assisted"
+  ],
+  "datasets": {
+    "inventors_college": [
+      {
+        "check_id": "inventors_college:1",
+        "target": "college row unit",
+        "reference": "Inventors-Codebook-Table-3.pdf, pp.1-2",
+        "judgments": {
+          "csv_baseline": {
+            "label": "supported",
+            "rationale": "Institutions are the entries."
+          },
+          "strict_paper_only": {
+            "label": "abstained",
+            "rationale": "Paper-only run abstained."
+          },
+          "documentation_assisted": {
+            "label": "supported",
+            "rationale": "Explicit college rows."
+          }
+        }
+      },
+      {
+        "check_id": "inventors_college:2",
+        "target": "inventor shares and patent/citation totals rather than counts of filings in five periods",
+        "reference": "Inventors-Codebook-Table-3.pdf, pp.1-2",
+        "judgments": {
+          "csv_baseline": {
+            "label": "incorrect",
+            "rationale": "Invents counts of patents filed in five periods."
+          },
+          "strict_paper_only": {
+            "label": "abstained",
+            "rationale": "Paper-only run abstained."
+          },
+          "documentation_assisted": {
+            "label": "supported",
+            "rationale": "Separates inventor shares, patent totals and citation totals."
+          }
+        }
+      },
+      {
+        "check_id": "inventors_college:3",
+        "target": "parent income quintiles",
+        "reference": "Inventors-Codebook-Table-3.pdf, pp.1-2",
+        "judgments": {
+          "csv_baseline": {
+            "label": "omitted",
+            "rationale": "No parental income grouping definition."
+          },
+          "strict_paper_only": {
+            "label": "abstained",
+            "rationale": "Paper-only run abstained."
+          },
+          "documentation_assisted": {
+            "label": "supported",
+            "rationale": "Explicit income quintile count/share fields."
+          }
+        }
+      },
+      {
+        "check_id": "inventors_college:4",
+        "target": "college assigned by most attendance in ages 19-22",
+        "reference": "Inventors-Codebook-Table-3.pdf, pp.1-2",
+        "judgments": {
+          "csv_baseline": {
+            "label": "omitted",
+            "rationale": "No attendance-age assignment definition."
+          },
+          "strict_paper_only": {
+            "label": "abstained",
+            "rationale": "Paper-only run abstained."
+          },
+          "documentation_assisted": {
+            "label": "omitted",
+            "rationale": "Attendance ages and assignment rule are not described."
+          }
+        }
+      }
+    ],
+    "inventors_childhood_cz": [
+      {
+        "check_id": "inventors_childhood_cz:1",
+        "target": "childhood CZ row unit rather than cities",
+        "reference": "Inventors-Codebook-Table-1.pdf, pp.1-2",
+        "judgments": {
+          "csv_baseline": {
+            "label": "incorrect",
+            "rationale": "Calls CZs cities and implies city/state row resolutions."
+          },
+          "strict_paper_only": {
+            "label": "supported",
+            "rationale": "Explicit childhood CZ row unit."
+          },
+          "documentation_assisted": {
+            "label": "supported",
+            "rationale": "Fresh run assigns each row to a childhood CZ."
+          }
+        }
+      },
+      {
+        "check_id": "inventors_childhood_cz:2",
+        "target": "share of children becoming inventors",
+        "reference": "Inventors-Codebook-Table-1.pdf, pp.1-2",
+        "judgments": {
+          "csv_baseline": {
+            "label": "partial",
+            "rationale": "Mentions inventor metrics without defining a share."
+          },
+          "strict_paper_only": {
+            "label": "omitted",
+            "rationale": "Only row-unit claim survives."
+          },
+          "documentation_assisted": {
+            "label": "supported",
+            "rationale": "Fresh run defines inventor as a share of children with patent application/grant outcomes."
+          }
+        }
+      },
+      {
+        "check_id": "inventors_childhood_cz:3",
+        "target": "parent income quintiles",
+        "reference": "Inventors-Codebook-Table-1.pdf, pp.1-2",
+        "judgments": {
+          "csv_baseline": {
+            "label": "omitted",
+            "rationale": "No parent income quintiles."
+          },
+          "strict_paper_only": {
+            "label": "omitted",
+            "rationale": "No parent income quintiles."
+          },
+          "documentation_assisted": {
+            "label": "supported",
+            "rationale": "Fresh run defines _pq_1 through _pq_5 as quintile groups."
+          }
+        }
+      },
+      {
+        "check_id": "inventors_childhood_cz:4",
+        "target": "highly cited inventor ranking rather than patent ranking",
+        "reference": "Inventors-Codebook-Table-1.pdf, pp.1-2",
+        "judgments": {
+          "csv_baseline": {
+            "label": "omitted",
+            "rationale": "No highly cited inventor definition."
+          },
+          "strict_paper_only": {
+            "label": "omitted",
+            "rationale": "No highly cited inventor definition."
+          },
+          "documentation_assisted": {
+            "label": "omitted",
+            "rationale": "Fresh run omits both top5cit claims; previous patent-ranking error is removed by omission, not replaced with a correct definition."
+          }
+        }
+      }
+    ],
+    "atlas_county_covariates": [
+      {
+        "check_id": "atlas_county_covariates:1",
+        "target": "county row unit rather than mixed counties/cities",
+        "reference": "Codebook-for-Table-10.pdf, pp.1-3",
+        "judgments": {
+          "csv_baseline": {
+            "label": "incorrect",
+            "rationale": "Implies counties and cities as observation units."
+          },
+          "strict_paper_only": {
+            "label": "abstained",
+            "rationale": "Paper-only run abstained."
+          },
+          "documentation_assisted": {
+            "label": "supported",
+            "rationale": "County rows with state/county FIPS codes."
+          }
+        }
+      },
+      {
+        "check_id": "atlas_county_covariates:2",
+        "target": "income and poverty measures",
+        "reference": "Codebook-for-Table-10.pdf, pp.1-3",
+        "judgments": {
+          "csv_baseline": {
+            "label": "supported",
+            "rationale": "Names income and poverty measures."
+          },
+          "strict_paper_only": {
+            "label": "abstained",
+            "rationale": "Paper-only run abstained."
+          },
+          "documentation_assisted": {
+            "label": "supported",
+            "rationale": "Defines household income and poverty fields."
+          }
+        }
+      },
+      {
+        "check_id": "atlas_county_covariates:3",
+        "target": "variable-specific measurement periods",
+        "reference": "Codebook-for-Table-10.pdf, pp.1-3",
+        "judgments": {
+          "csv_baseline": {
+            "label": "supported",
+            "rationale": "Identifies measures spanning 1990-2016."
+          },
+          "strict_paper_only": {
+            "label": "abstained",
+            "rationale": "Paper-only run abstained."
+          },
+          "documentation_assisted": {
+            "label": "supported",
+            "rationale": "Defines separate measurement years and source periods."
+          }
+        }
+      },
+      {
+        "check_id": "atlas_county_covariates:4",
+        "target": "generally population-weighted tract aggregation with exceptions",
+        "reference": "Codebook-for-Table-10.pdf, pp.1-3",
+        "judgments": {
+          "csv_baseline": {
+            "label": "omitted",
+            "rationale": "No aggregation rule."
+          },
+          "strict_paper_only": {
+            "label": "abstained",
+            "rationale": "Paper-only run abstained."
+          },
+          "documentation_assisted": {
+            "label": "omitted",
+            "rationale": "Does not explain population-weighted tract aggregation or its exceptions."
+          }
+        }
+      }
+    ],
+    "atlas_county_outcomes": [
+      {
+        "check_id": "atlas_county_outcomes:1",
+        "target": "county row unit rather than mixed city/state rows",
+        "reference": "Codebook-for-Table-2.pdf, pp.1-2",
+        "judgments": {
+          "csv_baseline": {
+            "label": "ambiguous",
+            "rationale": "Mentions states, counties and city identifiers without establishing one row per county; does not explicitly assert one row per state or city, so this is treated as ambiguity rather than a definite mixed-row claim."
+          },
+          "strict_paper_only": {
+            "label": "abstained",
+            "rationale": "Paper-only run abstained."
+          },
+          "documentation_assisted": {
+            "label": "supported",
+            "rationale": "County row unit; race and gender are column groupings."
+          }
+        }
+      },
+      {
+        "check_id": "atlas_county_outcomes:2",
+        "target": "household income rank conditional on parent percentile 25",
+        "reference": "Codebook-for-Table-2.pdf, pp.1-2",
+        "judgments": {
+          "csv_baseline": {
+            "label": "omitted",
+            "rationale": "No household income rank conditional on parent percentile 25."
+          },
+          "strict_paper_only": {
+            "label": "abstained",
+            "rationale": "Paper-only run abstained."
+          },
+          "documentation_assisted": {
+            "label": "supported",
+            "rationale": "Defines kfr at parent percentile 25."
+          }
+        }
+      },
+      {
+        "check_id": "atlas_county_outcomes:3",
+        "target": "race and gender groupings",
+        "reference": "Codebook-for-Table-2.pdf, pp.1-2",
+        "judgments": {
+          "csv_baseline": {
+            "label": "supported",
+            "rationale": "Explicitly mentions race and gender measurements."
+          },
+          "strict_paper_only": {
+            "label": "abstained",
+            "rationale": "Paper-only run abstained."
+          },
+          "documentation_assisted": {
+            "label": "supported",
+            "rationale": "Explicit race/gender outcome groups."
+          }
+        }
+      },
+      {
+        "check_id": "atlas_county_outcomes:4",
+        "target": "incarceration measured April 1, 2010",
+        "reference": "Codebook-for-Table-2.pdf, pp.1-2",
+        "judgments": {
+          "csv_baseline": {
+            "label": "omitted",
+            "rationale": "No incarceration reference date."
+          },
+          "strict_paper_only": {
+            "label": "abstained",
+            "rationale": "Paper-only run abstained."
+          },
+          "documentation_assisted": {
+            "label": "supported",
+            "rationale": "Explicit April 1, 2010 date."
+          }
+        }
+      }
+    ],
+    "life_national_mortality": [
+      {
+        "check_id": "life_national_mortality:1",
+        "target": "aggregated mortality cell rather than individual record",
+        "reference": "health_ineq_online_table_15_readme.pdf, p.1; actual age_at_d / lag values",
+        "judgments": {
+          "csv_baseline": {
+            "label": "incorrect",
+            "rationale": "Calls rows information on individuals."
+          },
+          "strict_paper_only": {
+            "label": "omitted",
+            "rationale": "Does not state the observation-unit cell."
+          },
+          "documentation_assisted": {
+            "label": "supported",
+            "rationale": "Explicit gender-age-year-income mortality cell."
+          }
+        }
+      },
+      {
+        "check_id": "life_national_mortality:2",
+        "target": "gender-age-year-income-percentile cell grouping",
+        "reference": "health_ineq_online_table_15_readme.pdf, p.1; actual age_at_d / lag values",
+        "judgments": {
+          "csv_baseline": {
+            "label": "partial",
+            "rationale": "Names demographic fields and years without clearly defining their joint cell grouping."
+          },
+          "strict_paper_only": {
+            "label": "partial",
+            "rationale": "Discusses income percentile grouping and years, but not the complete joint mortality cell."
+          },
+          "documentation_assisted": {
+            "label": "supported",
+            "rationale": "All four grouping dimensions explicitly stated."
+          }
+        }
+      },
+      {
+        "check_id": "life_national_mortality:3",
+        "target": "mortality rate denominator is beginning-of-year count",
+        "reference": "health_ineq_online_table_15_readme.pdf, p.1; actual age_at_d / lag values",
+        "judgments": {
+          "csv_baseline": {
+            "label": "omitted",
+            "rationale": "Mean mortality statistic does not define the rate denominator."
+          },
+          "strict_paper_only": {
+            "label": "omitted",
+            "rationale": "SSA death source is not the beginning-of-year denominator."
+          },
+          "documentation_assisted": {
+            "label": "supported",
+            "rationale": "Count at beginning of year explicitly identified as denominator."
+          }
+        }
+      },
+      {
+        "check_id": "life_national_mortality:4",
+        "target": "income lag two years at ages 40-63 and income at age 61 for ages 64-76",
+        "reference": "health_ineq_online_table_15_readme.pdf, p.1; actual age_at_d / lag values",
+        "judgments": {
+          "csv_baseline": {
+            "label": "omitted",
+            "rationale": "No income lag definition."
+          },
+          "strict_paper_only": {
+            "label": "partial",
+            "rationale": "Mentions two-year lag but omits the age-63/64 switch and fixed-age-61 rule."
+          },
+          "documentation_assisted": {
+            "label": "supported",
+            "rationale": "Explicit non-overlapping 40-63 / 64-76 income measurement rule."
+          }
+        }
+      }
+    ],
+    "life_county_expectancy": [
+      {
+        "check_id": "life_county_expectancy:1",
+        "target": "county row unit rather than city/CZ/state observations",
+        "reference": "health_ineq_online_table_11_readme.pdf, pp.1-2",
+        "judgments": {
+          "csv_baseline": {
+            "label": "supported",
+            "rationale": "Opening sentence identifies county-level observations. The unsupported later mention of city identifiers is an additional error outside this narrowly defined row-unit target."
+          },
+          "strict_paper_only": {
+            "label": "abstained",
+            "rationale": "Paper-only run abstained."
+          },
+          "documentation_assisted": {
+            "label": "supported",
+            "rationale": "Explicit county rows; CZ/state identified only as context."
+          }
+        }
+      },
+      {
+        "check_id": "life_county_expectancy:2",
+        "target": "income quartiles rather than calendar quarters",
+        "reference": "health_ineq_online_table_11_readme.pdf, pp.1-2",
+        "judgments": {
+          "csv_baseline": {
+            "label": "incorrect",
+            "rationale": "Calls income groups four quarters."
+          },
+          "strict_paper_only": {
+            "label": "abstained",
+            "rationale": "Paper-only run abstained."
+          },
+          "documentation_assisted": {
+            "label": "supported",
+            "rationale": "Explicit income quartiles."
+          }
+        }
+      },
+      {
+        "check_id": "life_county_expectancy:3",
+        "target": "both adjusted and unadjusted estimates",
+        "reference": "health_ineq_online_table_11_readme.pdf, pp.1-2",
+        "judgments": {
+          "csv_baseline": {
+            "label": "omitted",
+            "rationale": "No adjusted/unadjusted distinction."
+          },
+          "strict_paper_only": {
+            "label": "abstained",
+            "rationale": "Paper-only run abstained."
+          },
+          "documentation_assisted": {
+            "label": "supported",
+            "rationale": "Both adjusted and unadjusted estimates explicitly stated."
+          }
+        }
+      },
+      {
+        "check_id": "life_county_expectancy:4",
+        "target": "uncertainty fields are standard errors",
+        "reference": "health_ineq_online_table_11_readme.pdf, pp.1-2",
+        "judgments": {
+          "csv_baseline": {
+            "label": "omitted",
+            "rationale": "No uncertainty-field definition."
+          },
+          "strict_paper_only": {
+            "label": "abstained",
+            "rationale": "Paper-only run abstained."
+          },
+          "documentation_assisted": {
+            "label": "supported",
+            "rationale": "Explicit standard errors, not across-area standard deviations."
+          }
+        }
+      }
+    ],
+    "race_national_statistics": [
+      {
+        "check_id": "race_national_statistics:1",
+        "target": "one row per parent income percentile",
+        "reference": "table_1.pdf, pp.1-3",
+        "judgments": {
+          "csv_baseline": {
+            "label": "omitted",
+            "rationale": "No row-unit percentile definition."
+          },
+          "strict_paper_only": {
+            "label": "supported",
+            "rationale": "Explicit one row per parent income percentile."
+          },
+          "documentation_assisted": {
+            "label": "supported",
+            "rationale": "Explicit row per parent percentile."
+          }
+        }
+      },
+      {
+        "check_id": "race_national_statistics:2",
+        "target": "1978-1983 birth cohorts",
+        "reference": "table_1.pdf, pp.1-3",
+        "judgments": {
+          "csv_baseline": {
+            "label": "omitted",
+            "rationale": "No cohort years."
+          },
+          "strict_paper_only": {
+            "label": "omitted",
+            "rationale": "Birth-cohort ranking is discussed without cohort years."
+          },
+          "documentation_assisted": {
+            "label": "supported",
+            "rationale": "Explicit 1978-83 cohort."
+          }
+        }
+      },
+      {
+        "check_id": "race_national_statistics:3",
+        "target": "race and gender groupings",
+        "reference": "table_1.pdf, pp.1-3",
+        "judgments": {
+          "csv_baseline": {
+            "label": "partial",
+            "rationale": "Race groups named; gender grouping not explained."
+          },
+          "strict_paper_only": {
+            "label": "omitted",
+            "rationale": "No race/gender groupings in the surviving claims."
+          },
+          "documentation_assisted": {
+            "label": "supported",
+            "rationale": "Race and gender field families explicitly defined."
+          }
+        }
+      },
+      {
+        "check_id": "race_national_statistics:4",
+        "target": "adult household income ranks rather than demographic densities",
+        "reference": "table_1.pdf, pp.1-3",
+        "judgments": {
+          "csv_baseline": {
+            "label": "omitted",
+            "rationale": "Demographic densities/educational metrics do not explain adult household income ranks."
+          },
+          "strict_paper_only": {
+            "label": "partial",
+            "rationale": "Defines child income ranks within birth cohort but does not establish that the stored kfr measures are adult household-income ranks."
+          },
+          "documentation_assisted": {
+            "label": "supported",
+            "rationale": "Defines mean child household income rank fields."
+          }
+        }
+      }
+    ],
+    "race_cz_income": [
+      {
+        "check_id": "race_cz_income:1",
+        "target": "CZ row unit rather than cities",
+        "reference": "table_4.pdf, pp.1-2",
+        "judgments": {
+          "csv_baseline": {
+            "label": "incorrect",
+            "rationale": "Calls CZs cities."
+          },
+          "strict_paper_only": {
+            "label": "abstained",
+            "rationale": "Paper-only run abstained."
+          },
+          "documentation_assisted": {
+            "label": "supported",
+            "rationale": "Explicit CZ row unit."
+          }
+        }
+      },
+      {
+        "check_id": "race_cz_income:2",
+        "target": "adult individual and household income ranks",
+        "reference": "table_4.pdf, pp.1-2",
+        "judgments": {
+          "csv_baseline": {
+            "label": "omitted",
+            "rationale": "No adult individual/household income ranks."
+          },
+          "strict_paper_only": {
+            "label": "abstained",
+            "rationale": "Paper-only run abstained."
+          },
+          "documentation_assisted": {
+            "label": "supported",
+            "rationale": "Household kfr and individual kir ranks defined."
+          }
+        }
+      },
+      {
+        "check_id": "race_cz_income:3",
+        "target": "predictions at parent income percentiles 25 and 75",
+        "reference": "table_4.pdf, pp.1-2",
+        "judgments": {
+          "csv_baseline": {
+            "label": "omitted",
+            "rationale": "No parent percentile conditions."
+          },
+          "strict_paper_only": {
+            "label": "abstained",
+            "rationale": "Paper-only run abstained."
+          },
+          "documentation_assisted": {
+            "label": "partial",
+            "rationale": "Parent percentile 25 is explicit; generic percentile template omits the numeric 75 condition."
+          }
+        }
+      },
+      {
+        "check_id": "race_cz_income:4",
+        "target": "2000 Census population counts",
+        "reference": "table_4.pdf, pp.1-2",
+        "judgments": {
+          "csv_baseline": {
+            "label": "supported",
+            "rationale": "Explicit 2000 population and race counts."
+          },
+          "strict_paper_only": {
+            "label": "abstained",
+            "rationale": "Paper-only run abstained."
+          },
+          "documentation_assisted": {
+            "label": "supported",
+            "rationale": "Explicit 2000 Census total and race population counts."
+          }
+        }
+      }
+    ],
+    "college_access_mobility": [
+      {
+        "check_id": "college_access_mobility:1",
+        "target": "college reporting unit",
+        "reference": "Codebook-MRC-Table-1.pdf, pp.1-2",
+        "judgments": {
+          "csv_baseline": {
+            "label": "supported",
+            "rationale": "Explicit institutional entries."
+          },
+          "strict_paper_only": {
+            "label": "abstained",
+            "rationale": "Paper-only run abstained."
+          },
+          "documentation_assisted": {
+            "label": "supported",
+            "rationale": "Fresh output reports cohort counts for each college; college reporting unit is clear."
+          }
+        }
+      },
+      {
+        "check_id": "college_access_mobility:2",
+        "target": "bottom parent income quintile rather than quartile",
+        "reference": "Codebook-MRC-Table-1.pdf, pp.1-2",
+        "judgments": {
+          "csv_baseline": {
+            "label": "incorrect",
+            "rationale": "Calls par_q1 first quartile, although this table uses bottom quintile."
+          },
+          "strict_paper_only": {
+            "label": "abstained",
+            "rationale": "Paper-only run abstained."
+          },
+          "documentation_assisted": {
+            "label": "supported",
+            "rationale": "Fresh output explicitly distinguishes bottom 20% parent income group, a quintile."
+          }
+        }
+      },
+      {
+        "check_id": "college_access_mobility:3",
+        "target": "joint mobility share of all students versus conditional success rate",
+        "reference": "Codebook-MRC-Table-1.pdf, pp.1-2",
+        "judgments": {
+          "csv_baseline": {
+            "label": "omitted",
+            "rationale": "No joint versus conditional denominator distinction."
+          },
+          "strict_paper_only": {
+            "label": "abstained",
+            "rationale": "Paper-only run abstained."
+          },
+          "documentation_assisted": {
+            "label": "supported",
+            "rationale": "Fresh mr_kq5_pq1 sentence uses the conjunction of bottom-parent and top-child events over students; separate conditional sentence uses among bottom-parent children."
+          }
+        }
+      },
+      {
+        "check_id": "college_access_mobility:4",
+        "target": "per-household five-year income average versus across-student median",
+        "reference": "Codebook-MRC-Table-1.pdf, pp.1-2",
+        "judgments": {
+          "csv_baseline": {
+            "label": "partial",
+            "rationale": "Mentions median incomes but not per-household five-year averaging."
+          },
+          "strict_paper_only": {
+            "label": "abstained",
+            "rationale": "Paper-only run abstained."
+          },
+          "documentation_assisted": {
+            "label": "ambiguous",
+            "rationale": "Fresh par_median sentence still equates the reported median with a five-year average, without separating household time averaging from the across-student median."
+          }
+        }
+      }
+    ],
+    "college_characteristics": [
+      {
+        "check_id": "college_characteristics:1",
+        "target": "college or college-group row unit",
+        "reference": "Codebook-MRC-Table-10.pdf, pp.1-3; mapped paper p.69 for exp_instr_pc_2000; actual CSV names",
+        "judgments": {
+          "csv_baseline": {
+            "label": "partial",
+            "rationale": "College rows described without the college-group unit."
+          },
+          "strict_paper_only": {
+            "label": "omitted",
+            "rationale": "Field definitions do not explicitly state row/group unit."
+          },
+          "documentation_assisted": {
+            "label": "supported",
+            "rationale": "Explicit college or college-group super_opeid rows."
+          }
+        }
+      },
+      {
+        "check_id": "college_characteristics:2",
+        "target": "correct field-specific expenditure units: exp_instr_pc is per student; exp_instr is total",
+        "reference": "Codebook-MRC-Table-10.pdf, pp.1-3; mapped paper p.69 for exp_instr_pc_2000; actual CSV names",
+        "judgments": {
+          "csv_baseline": {
+            "label": "omitted",
+            "rationale": "No instructional expenditure definition."
+          },
+          "strict_paper_only": {
+            "label": "supported",
+            "rationale": "Explicit exp_instr_pc_2000 per-student unit; does not map the total field to a per-student unit."
+          },
+          "documentation_assisted": {
+            "label": "omitted",
+            "rationale": "No instructional expenditure claim survives; omission is not a unit correction."
+          }
+        }
+      },
+      {
+        "check_id": "college_characteristics:3",
+        "target": "Asian OR Pacific Islander coverage when describing that share",
+        "reference": "Codebook-MRC-Table-10.pdf, pp.1-3; mapped paper p.69 for exp_instr_pc_2000; actual CSV names",
+        "judgments": {
+          "csv_baseline": {
+            "label": "omitted",
+            "rationale": "Generic race breakdown does not identify Asian/Pacific coverage."
+          },
+          "strict_paper_only": {
+            "label": "supported",
+            "rationale": "Explicit Asian or Pacific Islander share."
+          },
+          "documentation_assisted": {
+            "label": "omitted",
+            "rationale": "Only Black share is described; Asian/Pacific field omitted."
+          }
+        }
+      },
+      {
+        "check_id": "college_characteristics:4",
+        "target": "graduation within 150% of normal time",
+        "reference": "Codebook-MRC-Table-10.pdf, pp.1-3; mapped paper p.69 for exp_instr_pc_2000; actual CSV names",
+        "judgments": {
+          "csv_baseline": {
+            "label": "omitted",
+            "rationale": "No 150%-of-normal-time graduation definition."
+          },
+          "strict_paper_only": {
+            "label": "supported",
+            "rationale": "Explicit 2002 150%-of-normal-time graduation definition."
+          },
+          "documentation_assisted": {
+            "label": "supported",
+            "rationale": "Explicit 2013 150%-of-normal-time graduation definition."
+          }
+        }
+      }
+    ]
+  }
+}

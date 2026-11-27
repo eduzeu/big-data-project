@@ -339,3 +339,25 @@ previous expenditure audit are documented in
 reference descriptions are available separately. Model-approved drafts still need
 factual review; the two input conditions must not be combined into an accuracy
 score.
+
+### Paired evaluation
+
+[Evaluation report](evaluation/REPORT.md), [side-by-side generated outputs](evaluation/SIDE_BY_SIDE.md)
+and [explicit source-based annotations](evaluation/annotations.json) compare the
+ten baselines with both revised conditions. This is a focused development audit,
+not a blinded accuracy benchmark. The two previously flagged documented cases
+received one fresh unchanged-condition verification run each; neither result was
+selected by best-of sampling. Curated reference text is not scored as model output.
+
+Reproduce the comparison without API calls:
+
+```bash
+python evaluate_outputs.py --baseline-root /path/to/results/dataset_validation --results-root /path/to/results/description_accuracy --fresh-root /path/to/results/step3-verification --output /path/to/results/paired_evaluation
+```
+
+The script checks input/sample/profile parity, input-condition labels and annotation
+completeness before producing JSON, a report and side-by-side text. Each condition
+has the same 40 semantic targets; supported, partial, missing, incorrect, ambiguous
+and abstained outcomes remain separate. Longer outputs, different models/prompts,
+and added documentation limit causal comparisons. Codebook-assisted agreement is
+source consistency, not independent held-out accuracy.

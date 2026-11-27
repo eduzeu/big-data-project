@@ -1,0 +1,1325 @@
+{
+  "annotation_method": "Codex source-based review; no independent human rater, blinding, or preregistration",
+  "scope": "Four targeted semantic checks per dataset; not a complete claim audit or overall accuracy benchmark",
+  "reference_leakage_note": "Documentation is held out of baseline and strict paper-only requests but was inspected during development. It is generation input for documented outputs; their annotations measure source consistency, not held-out performance.",
+  "selection_rule": "Reuse preserved successful runs; make one fresh, unchanged-condition verification run for each of the two previously flagged documented datasets. Preserve both old and fresh outputs; no best-of selection.",
+  "limitations": [
+    "Focused checks are correlated and incomplete; counts are not overall factual accuracy.",
+    "Development cases were inspected previously; there is no blind holdout or independent human rater.",
+    "Documentation-assisted agreement is source consistency because the same documentation was a model input.",
+    "Generation models, prompts, retrieval, review stages and output lengths differ; this is not a single-component ablation or a matched-token-budget experiment.",
+    "One fresh run per flagged case is insufficient to estimate repeatability or variance."
+  ],
+  "checks_per_condition": 40,
+  "totals": {
+    "csv_baseline": {
+      "supported": 7,
+      "incorrect": 7,
+      "omitted": 20,
+      "partial": 5,
+      "ambiguous": 1
+    },
+    "strict_paper_only": {
+      "abstained": 24,
+      "supported": 5,
+      "omitted": 8,
+      "partial": 3
+    },
+    "documentation_assisted": {
+      "supported": 33,
+      "omitted": 5,
+      "partial": 1,
+      "ambiguous": 1
+    }
+  },
+  "datasets": [
+    {
+      "dataset_id": "inventors_college",
+      "checks": [
+        {
+          "check_id": "inventors_college:1",
+          "target": "college row unit",
+          "reference": "Inventors-Codebook-Table-3.pdf, pp.1-2",
+          "judgments": {
+            "csv_baseline": {
+              "label": "supported",
+              "rationale": "Institutions are the entries."
+            },
+            "strict_paper_only": {
+              "label": "abstained",
+              "rationale": "Paper-only run abstained."
+            },
+            "documentation_assisted": {
+              "label": "supported",
+              "rationale": "Explicit college rows."
+            }
+          }
+        },
+        {
+          "check_id": "inventors_college:2",
+          "target": "inventor shares and patent/citation totals rather than counts of filings in five periods",
+          "reference": "Inventors-Codebook-Table-3.pdf, pp.1-2",
+          "judgments": {
+            "csv_baseline": {
+              "label": "incorrect",
+              "rationale": "Invents counts of patents filed in five periods."
+            },
+            "strict_paper_only": {
+              "label": "abstained",
+              "rationale": "Paper-only run abstained."
+            },
+            "documentation_assisted": {
+              "label": "supported",
+              "rationale": "Separates inventor shares, patent totals and citation totals."
+            }
+          }
+        },
+        {
+          "check_id": "inventors_college:3",
+          "target": "parent income quintiles",
+          "reference": "Inventors-Codebook-Table-3.pdf, pp.1-2",
+          "judgments": {
+            "csv_baseline": {
+              "label": "omitted",
+              "rationale": "No parental income grouping definition."
+            },
+            "strict_paper_only": {
+              "label": "abstained",
+              "rationale": "Paper-only run abstained."
+            },
+            "documentation_assisted": {
+              "label": "supported",
+              "rationale": "Explicit income quintile count/share fields."
+            }
+          }
+        },
+        {
+          "check_id": "inventors_college:4",
+          "target": "college assigned by most attendance in ages 19-22",
+          "reference": "Inventors-Codebook-Table-3.pdf, pp.1-2",
+          "judgments": {
+            "csv_baseline": {
+              "label": "omitted",
+              "rationale": "No attendance-age assignment definition."
+            },
+            "strict_paper_only": {
+              "label": "abstained",
+              "rationale": "Paper-only run abstained."
+            },
+            "documentation_assisted": {
+              "label": "omitted",
+              "rationale": "Attendance ages and assignment rule are not described."
+            }
+          }
+        }
+      ],
+      "conditions": {
+        "csv_baseline": {
+          "status": "baseline_generated",
+          "description": "This dataset contains information from 423 educational institutions, detailing various metrics related to their patent activities. Each entry includes a unique identifier for the institution, the institution's name, and counts of patents filed over five different periods. Additionally, it provides insights into the number of inventors associated with these patents and their citation metrics. The dataset features a range of values for total patents and total citations, highlighting the varying levels of innovation across institutions. The semantic profile indicates that the data is primarily used for measurement and aggregation, making it valuable for analyzing trends in educational patenting.",
+          "description_sha256": "ac2604e0d919a55941d3b285aad2e26055fe1cbc6bb5fe802c7c7edb75683a76",
+          "generation_sha256": "6dcc2579f042a8866bcfc03b1c88edd32697ac455a8677757321d5fa24386fd8",
+          "csv_sha256": "174862d1ebedc009cde7945ac455d476fd7b6e3c39b3e82852ada5b6b94ba4a3",
+          "source_root": "baseline",
+          "source_directory": "inventors_college/baseline",
+          "labels": {
+            "supported": 1,
+            "incorrect": 1,
+            "omitted": 2
+          },
+          "rows": 423,
+          "columns": 17
+        },
+        "strict_paper_only": {
+          "status": "abstained",
+          "description": "This dataset contains 423 rows and 17 columns.\n\nNo table-specific semantic claim passed both evidence reviews. Field meanings remain unresolved from the available paper evidence.\n",
+          "description_sha256": "ee6b9e797523739c40f1b6ce2ad11a0dacdb1af0223eaba35a1f58e986129eed",
+          "generation_sha256": "3e222b55d756f72092a05859a69fa4574bac7397b8e356d67556e25cf82516eb",
+          "csv_sha256": "174862d1ebedc009cde7945ac455d476fd7b6e3c39b3e82852ada5b6b94ba4a3",
+          "source_root": "revised",
+          "source_directory": "strict-description-validation/inventors_college",
+          "labels": {
+            "abstained": 4
+          },
+          "rows": 423,
+          "columns": 17
+        },
+        "documentation_assisted": {
+          "status": "generated",
+          "description": "This dataset contains 423 rows and 17 columns.\n\nEach row represents a college attended by students in the sample. [documentation:inventors_college:p1:w180] [documentation:inventors_college:p2:w0]\n\nThe count column reports the number of students assigned to each college. [documentation:inventors_college:p2:w0]\n\nThe count_pq1 to count_pq5 columns report the number of students at each college whose parents are in each income quintile. [documentation:inventors_college:p2:w0]\n\nThe inventor column gives the share of students at each college who are inventors. [documentation:inventors_college:p2:w0]\n\nThe inventor_pq1 to inventor_pq5 columns give the share of students with parents in each income quintile who are inventors at each college. [documentation:inventors_college:p2:w0]\n\nThe total_patents and total_cites columns report the total number of patents granted to students and total patent citations obtained by students at each college. [documentation:inventors_college:p2:w0]\n",
+          "description_sha256": "5161852c40976f2da97c649661b5d5d5a8236e57b593b891d3ec14aee2433626",
+          "generation_sha256": "e10a7d2e719e8f051e9150ca4b2392fe7694f41f886609281cbf048ea7f946b2",
+          "csv_sha256": "174862d1ebedc009cde7945ac455d476fd7b6e3c39b3e82852ada5b6b94ba4a3",
+          "source_root": "revised",
+          "source_directory": "documented-description-validation/inventors_college",
+          "labels": {
+            "supported": 3,
+            "omitted": 1
+          },
+          "rows": 423,
+          "columns": 17
+        }
+      }
+    },
+    {
+      "dataset_id": "inventors_childhood_cz",
+      "checks": [
+        {
+          "check_id": "inventors_childhood_cz:1",
+          "target": "childhood CZ row unit rather than cities",
+          "reference": "Inventors-Codebook-Table-1.pdf, pp.1-2",
+          "judgments": {
+            "csv_baseline": {
+              "label": "incorrect",
+              "rationale": "Calls CZs cities and implies city/state row resolutions."
+            },
+            "strict_paper_only": {
+              "label": "supported",
+              "rationale": "Explicit childhood CZ row unit."
+            },
+            "documentation_assisted": {
+              "label": "supported",
+              "rationale": "Fresh run assigns each row to a childhood CZ."
+            }
+          }
+        },
+        {
+          "check_id": "inventors_childhood_cz:2",
+          "target": "share of children becoming inventors",
+          "reference": "Inventors-Codebook-Table-1.pdf, pp.1-2",
+          "judgments": {
+            "csv_baseline": {
+              "label": "partial",
+              "rationale": "Mentions inventor metrics without defining a share."
+            },
+            "strict_paper_only": {
+              "label": "omitted",
+              "rationale": "Only row-unit claim survives."
+            },
+            "documentation_assisted": {
+              "label": "supported",
+              "rationale": "Fresh run defines inventor as a share of children with patent application/grant outcomes."
+            }
+          }
+        },
+        {
+          "check_id": "inventors_childhood_cz:3",
+          "target": "parent income quintiles",
+          "reference": "Inventors-Codebook-Table-1.pdf, pp.1-2",
+          "judgments": {
+            "csv_baseline": {
+              "label": "omitted",
+              "rationale": "No parent income quintiles."
+            },
+            "strict_paper_only": {
+              "label": "omitted",
+              "rationale": "No parent income quintiles."
+            },
+            "documentation_assisted": {
+              "label": "supported",
+              "rationale": "Fresh run defines _pq_1 through _pq_5 as quintile groups."
+            }
+          }
+        },
+        {
+          "check_id": "inventors_childhood_cz:4",
+          "target": "highly cited inventor ranking rather than patent ranking",
+          "reference": "Inventors-Codebook-Table-1.pdf, pp.1-2",
+          "judgments": {
+            "csv_baseline": {
+              "label": "omitted",
+              "rationale": "No highly cited inventor definition."
+            },
+            "strict_paper_only": {
+              "label": "omitted",
+              "rationale": "No highly cited inventor definition."
+            },
+            "documentation_assisted": {
+              "label": "omitted",
+              "rationale": "Fresh run omits both top5cit claims; previous patent-ranking error is removed by omission, not replaced with a correct definition."
+            }
+          }
+        }
+      ],
+      "conditions": {
+        "csv_baseline": {
+          "status": "baseline_generated",
+          "description": "This dataset contains 741 rows and 140 columns, focusing on various metrics related to cities across the United States. It includes unique identifiers for cities, state names, and abbreviations, along with numerical values such as kid counts and inventor metrics. The dataset features a range of measurements, with some columns representing general numerical values and others specifically related to inventor categories. Notably, the data includes spatial information at both city and state levels, enhancing its utility for geographic analysis. Missing values are present in several columns, indicating areas for potential data improvement.",
+          "description_sha256": "5550417ee7d30f9176f20ced7d25510784a2767cbf1bae0e7b773e8b2a259c06",
+          "generation_sha256": "459e259ff2588130c7a2856b7642b648de9330e32c5e471d2ec3a0c28766746b",
+          "csv_sha256": "a61602947f9705dfdb87fd55b9fc42affaa6ef397700f31b712c1fb1a0337b8b",
+          "source_root": "baseline",
+          "source_directory": "inventors_childhood_cz/baseline",
+          "labels": {
+            "incorrect": 1,
+            "partial": 1,
+            "omitted": 2
+          },
+          "rows": 741,
+          "columns": 140
+        },
+        "strict_paper_only": {
+          "status": "generated",
+          "description": "This dataset contains 741 rows and 140 columns.\n\nEach row in the table represents a childhood commuting zone (CZ), identified by par_cz, par_czname, par_state, and par_stateabbrv. [inventors:p46:w0] [inventors:p46:w180] [inventors:p59:w0]\n",
+          "description_sha256": "f0a89281543fa0c21b15b15bb04b5b617ac4d30c2ba42cf4771eb84f8681e2e3",
+          "generation_sha256": "74166535ddf076b242b95f3ce14626aaf7147d0d503c8a273e4d67fc5c3bdbdb",
+          "csv_sha256": "a61602947f9705dfdb87fd55b9fc42affaa6ef397700f31b712c1fb1a0337b8b",
+          "source_root": "revised",
+          "source_directory": "strict-description-validation/inventors_childhood_cz",
+          "labels": {
+            "supported": 1,
+            "omitted": 3
+          },
+          "rows": 741,
+          "columns": 140
+        },
+        "documentation_assisted": {
+          "status": "generated",
+          "description": "This dataset contains 741 rows and 140 columns.\n\nEach row in this table represents children born 1980-1984 assigned to a specific childhood commuting zone (CZ), identified by par_cz, par_czname, par_state, and par_stateabbrv. [documentation:inventors_childhood_cz:p1:w0] [documentation:inventors_childhood_cz:p1:w180] [documentation:inventors_childhood_cz:p2:w0]\n\nThe variable kid_count gives the number of children in each CZ cohort; cells with fewer than 250 children are omitted. [documentation:inventors_childhood_cz:p1:w180] [documentation:inventors_childhood_cz:p2:w0]\n\nThe inventor column reports the share of children in each CZ who go on to become inventors, defined as being listed on a patent application (2001\u20132012) or grant (1996\u20132014). [documentation:inventors_childhood_cz:p1:w0] [documentation:inventors_childhood_cz:p2:w0]\n\nColumns inventor_cat_1 through inventor_cat_7 report the share of children who patent in each of seven technology categories, assigned by the category in which they patent most often. [documentation:inventors_childhood_cz:p1:w180] [documentation:inventors_childhood_cz:p2:w0]\n\nVariables with the _g_m and _g_f suffixes restrict the sample to males and females, respectively, for each outcome. [documentation:inventors_childhood_cz:p2:w0]\n\nVariables with the _pq_1 to _pq_5 suffixes restrict the sample to children whose parental income is in the corresponding quintile of the parent income distribution for their birth cohort. [documentation:inventors_childhood_cz:p2:w0] [documentation:inventors_childhood_cz:p2:w180]\n",
+          "description_sha256": "1f77f33a84fa56fd71266ea60912e9567848c82f2ecbca1a5f97f647e5a22b9f",
+          "generation_sha256": "4f12227bccaf30608bbe1447c16948608df15f4f74f244e31f5e67adc18dbb43",
+          "csv_sha256": "a61602947f9705dfdb87fd55b9fc42affaa6ef397700f31b712c1fb1a0337b8b",
+          "source_root": "fresh",
+          "source_directory": "inventors_childhood_cz",
+          "labels": {
+            "supported": 3,
+            "omitted": 1
+          },
+          "rows": 741,
+          "columns": 140
+        }
+      },
+      "prior_documented_description_sha256": "0ba8b3d686aa3d804833b9edde9a577800e0a70963af8d90edd5c697f2dd8c7f",
+      "fresh_verification": true,
+      "fresh_output_changed": true
+    },
+    {
+      "dataset_id": "atlas_county_covariates",
+      "checks": [
+        {
+          "check_id": "atlas_county_covariates:1",
+          "target": "county row unit rather than mixed counties/cities",
+          "reference": "Codebook-for-Table-10.pdf, pp.1-3",
+          "judgments": {
+            "csv_baseline": {
+              "label": "incorrect",
+              "rationale": "Implies counties and cities as observation units."
+            },
+            "strict_paper_only": {
+              "label": "abstained",
+              "rationale": "Paper-only run abstained."
+            },
+            "documentation_assisted": {
+              "label": "supported",
+              "rationale": "County rows with state/county FIPS codes."
+            }
+          }
+        },
+        {
+          "check_id": "atlas_county_covariates:2",
+          "target": "income and poverty measures",
+          "reference": "Codebook-for-Table-10.pdf, pp.1-3",
+          "judgments": {
+            "csv_baseline": {
+              "label": "supported",
+              "rationale": "Names income and poverty measures."
+            },
+            "strict_paper_only": {
+              "label": "abstained",
+              "rationale": "Paper-only run abstained."
+            },
+            "documentation_assisted": {
+              "label": "supported",
+              "rationale": "Defines household income and poverty fields."
+            }
+          }
+        },
+        {
+          "check_id": "atlas_county_covariates:3",
+          "target": "variable-specific measurement periods",
+          "reference": "Codebook-for-Table-10.pdf, pp.1-3",
+          "judgments": {
+            "csv_baseline": {
+              "label": "supported",
+              "rationale": "Identifies measures spanning 1990-2016."
+            },
+            "strict_paper_only": {
+              "label": "abstained",
+              "rationale": "Paper-only run abstained."
+            },
+            "documentation_assisted": {
+              "label": "supported",
+              "rationale": "Defines separate measurement years and source periods."
+            }
+          }
+        },
+        {
+          "check_id": "atlas_county_covariates:4",
+          "target": "generally population-weighted tract aggregation with exceptions",
+          "reference": "Codebook-for-Table-10.pdf, pp.1-3",
+          "judgments": {
+            "csv_baseline": {
+              "label": "omitted",
+              "rationale": "No aggregation rule."
+            },
+            "strict_paper_only": {
+              "label": "abstained",
+              "rationale": "Paper-only run abstained."
+            },
+            "documentation_assisted": {
+              "label": "omitted",
+              "rationale": "Does not explain population-weighted tract aggregation or its exceptions."
+            }
+          }
+        }
+      ],
+      "conditions": {
+        "csv_baseline": {
+          "status": "baseline_generated",
+          "description": "This dataset contains 3,221 rows and 35 columns, providing a comprehensive overview of various socio-economic and demographic factors across different counties and cities in the United States. Key metrics include median household income, poverty rates, educational attainment, and population demographics from 1990 to 2016. The dataset also features commuting times and job growth statistics, offering insights into transportation and employment trends. Each column represents specific measurements related to location, financial metrics, and demographic statistics, making it a valuable resource for analyzing regional disparities and trends over time.",
+          "description_sha256": "c2d18aca2ac6cfece994d413fbeea84af59fec2addec209d16bbf11b263a23af",
+          "generation_sha256": "8d26a71ccc941c8f71e0f74b3cc889bbcf1b1d0abe617088af2cb902d51edeb9",
+          "csv_sha256": "4eb4f2f89292eb8f1d299bf104f870247ec432fe572a46e42fda89ec5ac98416",
+          "source_root": "baseline",
+          "source_directory": "atlas_county_covariates/baseline",
+          "labels": {
+            "incorrect": 1,
+            "supported": 2,
+            "omitted": 1
+          },
+          "rows": 3221,
+          "columns": 35
+        },
+        "strict_paper_only": {
+          "status": "abstained",
+          "description": "This dataset contains 3,221 rows and 35 columns.\n\nNo table-specific semantic claim passed both evidence reviews. Field meanings remain unresolved from the available paper evidence.\n",
+          "description_sha256": "9740b60f29061adb56fc14fbe3bab3296c2cfc1bba12bb536ee7a9b0ade66e3b",
+          "generation_sha256": "c4a1818a0a44ea7e436d2e234361cd63745429d6589c75fd0766e503b41b6f90",
+          "csv_sha256": "4eb4f2f89292eb8f1d299bf104f870247ec432fe572a46e42fda89ec5ac98416",
+          "source_root": "revised",
+          "source_directory": "strict-description-validation/atlas_county_covariates",
+          "labels": {
+            "abstained": 4
+          },
+          "rows": 3221,
+          "columns": 35
+        },
+        "documentation_assisted": {
+          "status": "generated",
+          "description": "This dataset contains 3,221 rows and 35 columns.\n\nEach row reports county-level neighborhood characteristics, uniquely identified by 2010 FIPS state and county codes. [documentation:atlas_county_covariates:p1:w0]\n\nThe mean household income in 2000 is reported for each county, based on the 2000 Decennial Census. [documentation:atlas_county_covariates:p2:w0]\n\nThe share of people aged 25+ with a college degree or higher is reported for 2000 and 2010, using Census and ACS data. [documentation:atlas_county_covariates:p2:w0]\n\nThe share of foreign-born residents in 2010 is calculated as the number of foreign-born divided by the total population (native plus foreign-born). [documentation:atlas_county_covariates:p1:w0]\n\nMedian household income is reported for 1990 and 2016, using the 1990 Census and 2012-2016 ACS, respectively. [documentation:atlas_county_covariates:p2:w180]\n\nThe share of individuals below the federal poverty line is reported for 1990, 2000, and 2010, using Census and ACS data. [documentation:atlas_county_covariates:p3:w0]\n\nRacial and ethnic shares for White, Black, Hispanic, and Asian populations are reported for 2000 and 2010, with non-Hispanic race categories. [documentation:atlas_county_covariates:p3:w0]\n",
+          "description_sha256": "85077ecff79d94edde16508d7feff66a4caf546cf06953d028e3c5c86f62aa96",
+          "generation_sha256": "b805e55523131fe105b72fe88c8679d2c1006f4db19502da0841454f8d91742d",
+          "csv_sha256": "4eb4f2f89292eb8f1d299bf104f870247ec432fe572a46e42fda89ec5ac98416",
+          "source_root": "revised",
+          "source_directory": "documented-description-validation/atlas_county_covariates",
+          "labels": {
+            "supported": 3,
+            "omitted": 1
+          },
+          "rows": 3221,
+          "columns": 35
+        }
+      }
+    },
+    {
+      "dataset_id": "atlas_county_outcomes",
+      "checks": [
+        {
+          "check_id": "atlas_county_outcomes:1",
+          "target": "county row unit rather than mixed city/state rows",
+          "reference": "Codebook-for-Table-2.pdf, pp.1-2",
+          "judgments": {
+            "csv_baseline": {
+              "label": "ambiguous",
+              "rationale": "Mentions states, counties and city identifiers without establishing one row per county; does not explicitly assert one row per state or city, so this is treated as ambiguity rather than a definite mixed-row claim."
+            },
+            "strict_paper_only": {
+              "label": "abstained",
+              "rationale": "Paper-only run abstained."
+            },
+            "documentation_assisted": {
+              "label": "supported",
+              "rationale": "County row unit; race and gender are column groupings."
+            }
+          }
+        },
+        {
+          "check_id": "atlas_county_outcomes:2",
+          "target": "household income rank conditional on parent percentile 25",
+          "reference": "Codebook-for-Table-2.pdf, pp.1-2",
+          "judgments": {
+            "csv_baseline": {
+              "label": "omitted",
+              "rationale": "No household income rank conditional on parent percentile 25."
+            },
+            "strict_paper_only": {
+              "label": "abstained",
+              "rationale": "Paper-only run abstained."
+            },
+            "documentation_assisted": {
+              "label": "supported",
+              "rationale": "Defines kfr at parent percentile 25."
+            }
+          }
+        },
+        {
+          "check_id": "atlas_county_outcomes:3",
+          "target": "race and gender groupings",
+          "reference": "Codebook-for-Table-2.pdf, pp.1-2",
+          "judgments": {
+            "csv_baseline": {
+              "label": "supported",
+              "rationale": "Explicitly mentions race and gender measurements."
+            },
+            "strict_paper_only": {
+              "label": "abstained",
+              "rationale": "Paper-only run abstained."
+            },
+            "documentation_assisted": {
+              "label": "supported",
+              "rationale": "Explicit race/gender outcome groups."
+            }
+          }
+        },
+        {
+          "check_id": "atlas_county_outcomes:4",
+          "target": "incarceration measured April 1, 2010",
+          "reference": "Codebook-for-Table-2.pdf, pp.1-2",
+          "judgments": {
+            "csv_baseline": {
+              "label": "omitted",
+              "rationale": "No incarceration reference date."
+            },
+            "strict_paper_only": {
+              "label": "abstained",
+              "rationale": "Paper-only run abstained."
+            },
+            "documentation_assisted": {
+              "label": "supported",
+              "rationale": "Explicit April 1, 2010 date."
+            }
+          }
+        }
+      ],
+      "conditions": {
+        "csv_baseline": {
+          "status": "baseline_generated",
+          "description": "This dataset contains 3,219 rows and 64 columns, focusing on various demographic and criminal justice metrics across different states and counties in the United States. It includes data on key variables such as the percentage of individuals in different racial and ethnic groups, as well as jail statistics, providing insights into the intersection of race and incarceration. The dataset features unique identifiers for states, counties, and cities, allowing for detailed spatial analysis. Additionally, it includes measurements related to gender and race, making it a valuable resource for understanding demographic trends and disparities in the criminal justice system.",
+          "description_sha256": "a4e5ec8239e633f895242eef2bde94ec917971d7f801ad3fba74e55602a65fce",
+          "generation_sha256": "de9f771b18541f069adefe9d0d3dd9b6fbff306eb1429d9003963f6c435ea2fc",
+          "csv_sha256": "c355f7cade477637edb57a09b81e11bc102cb61d76a4758bea640590f51a5895",
+          "source_root": "baseline",
+          "source_directory": "atlas_county_outcomes/baseline",
+          "labels": {
+            "ambiguous": 1,
+            "omitted": 2,
+            "supported": 1
+          },
+          "rows": 3219,
+          "columns": 64
+        },
+        "strict_paper_only": {
+          "status": "abstained",
+          "description": "This dataset contains 3,219 rows and 64 columns.\n\nNo table-specific semantic claim passed both evidence reviews. Field meanings remain unresolved from the available paper evidence.\n",
+          "description_sha256": "da1c42aaea9e3ff64048de3e53141d6809b189a261ad6c8e2668a948173c9b38",
+          "generation_sha256": "af7e2f2779ddfb888cdbc3c5be137ac24c96840b857ca2af56f49b6269c7eef4",
+          "csv_sha256": "c355f7cade477637edb57a09b81e11bc102cb61d76a4758bea640590f51a5895",
+          "source_root": "revised",
+          "source_directory": "strict-description-validation/atlas_county_outcomes",
+          "labels": {
+            "abstained": 4
+          },
+          "rows": 3219,
+          "columns": 64
+        },
+        "documentation_assisted": {
+          "status": "generated",
+          "description": "This dataset contains 3,219 rows and 64 columns.\n\nEach row reports predicted outcomes for children born 1978-1983 by county, race (Pooled, White, Black, Hispanic), and gender (Pooled, Male, Female). [documentation:atlas_county_outcomes:p1:w0] [documentation:atlas_county_outcomes:p1:w180]\n\nThe variable kfr_[race]_[gender]_p25 gives the mean household income rank in adulthood for children whose parents were at the 25th percentile of the national income distribution. [documentation:atlas_county_outcomes:p1:w180]\n\nChildren's incomes are measured as mean household earnings in 2014-2015, when they were ages 31-37, and household income includes own and spouse\u2019s income. [documentation:atlas_county_outcomes:p1:w180]\n\nThe variable jail_[race]_[gender]_p25 is the fraction of children born 1978-1983 with parents at the 25th percentile of national income who were incarcerated on April 1, 2010. [documentation:atlas_county_outcomes:p2:w0]\n\nIncarceration is defined as residing in a federal detention center, federal prison, state prison, local jail, residential correctional facility, military jail, or juvenile correctional facility. [documentation:atlas_county_outcomes:p2:w0]\n\nThe variables kfr_[race]_[gender]_p25_se and jail_[race]_[gender]_p25_se report estimated standard errors for the corresponding outcome variables, incorporating both sampling error and privacy noise. [documentation:atlas_county_outcomes:p1:w0] [documentation:atlas_county_outcomes:p2:w0]\n\nThe variables [race]_[gender]_count give the estimated number of children under 18 living in the county with parents whose household income was below the national median, based on the 2000 Census. [documentation:atlas_county_outcomes:p2:w0]\n",
+          "description_sha256": "da9d3ad92c2563f228b2a6517fac5b2ff64951f758ecd28b88cd594db7040119",
+          "generation_sha256": "a5356a81c3118eadfe7f07050b1bbd31c174c60fbd8315b7feed76c6256e1c4e",
+          "csv_sha256": "c355f7cade477637edb57a09b81e11bc102cb61d76a4758bea640590f51a5895",
+          "source_root": "revised",
+          "source_directory": "documented-description-retry/atlas_county_outcomes",
+          "labels": {
+            "supported": 4
+          },
+          "rows": 3219,
+          "columns": 64
+        }
+      }
+    },
+    {
+      "dataset_id": "life_national_mortality",
+      "checks": [
+        {
+          "check_id": "life_national_mortality:1",
+          "target": "aggregated mortality cell rather than individual record",
+          "reference": "health_ineq_online_table_15_readme.pdf, p.1; actual age_at_d / lag values",
+          "judgments": {
+            "csv_baseline": {
+              "label": "incorrect",
+              "rationale": "Calls rows information on individuals."
+            },
+            "strict_paper_only": {
+              "label": "omitted",
+              "rationale": "Does not state the observation-unit cell."
+            },
+            "documentation_assisted": {
+              "label": "supported",
+              "rationale": "Explicit gender-age-year-income mortality cell."
+            }
+          }
+        },
+        {
+          "check_id": "life_national_mortality:2",
+          "target": "gender-age-year-income-percentile cell grouping",
+          "reference": "health_ineq_online_table_15_readme.pdf, p.1; actual age_at_d / lag values",
+          "judgments": {
+            "csv_baseline": {
+              "label": "partial",
+              "rationale": "Names demographic fields and years without clearly defining their joint cell grouping."
+            },
+            "strict_paper_only": {
+              "label": "partial",
+              "rationale": "Discusses income percentile grouping and years, but not the complete joint mortality cell."
+            },
+            "documentation_assisted": {
+              "label": "supported",
+              "rationale": "All four grouping dimensions explicitly stated."
+            }
+          }
+        },
+        {
+          "check_id": "life_national_mortality:3",
+          "target": "mortality rate denominator is beginning-of-year count",
+          "reference": "health_ineq_online_table_15_readme.pdf, p.1; actual age_at_d / lag values",
+          "judgments": {
+            "csv_baseline": {
+              "label": "omitted",
+              "rationale": "Mean mortality statistic does not define the rate denominator."
+            },
+            "strict_paper_only": {
+              "label": "omitted",
+              "rationale": "SSA death source is not the beginning-of-year denominator."
+            },
+            "documentation_assisted": {
+              "label": "supported",
+              "rationale": "Count at beginning of year explicitly identified as denominator."
+            }
+          }
+        },
+        {
+          "check_id": "life_national_mortality:4",
+          "target": "income lag two years at ages 40-63 and income at age 61 for ages 64-76",
+          "reference": "health_ineq_online_table_15_readme.pdf, p.1; actual age_at_d / lag values",
+          "judgments": {
+            "csv_baseline": {
+              "label": "omitted",
+              "rationale": "No income lag definition."
+            },
+            "strict_paper_only": {
+              "label": "partial",
+              "rationale": "Mentions two-year lag but omits the age-63/64 switch and fixed-age-61 rule."
+            },
+            "documentation_assisted": {
+              "label": "supported",
+              "rationale": "Explicit non-overlapping 40-63 / 64-76 income measurement rule."
+            }
+          }
+        }
+      ],
+      "conditions": {
+        "csv_baseline": {
+          "status": "baseline_generated",
+          "description": "This dataset contains 85,400 rows and 8 columns, providing insights into various demographic and financial metrics. It includes information on individuals, such as gender, age, and household income, as well as mortality rates and percentile rankings. The age of individuals ranges from 40 to 76 years, with a mean age of approximately 55. The dataset spans years from 2001 to 2014, capturing temporal trends. Key metrics include a mean household income of about $97,996 and a mortality rate with a mean of 0.0061. The data is valuable for analyzing healthcare outcomes and financial conditions across different demographics.",
+          "description_sha256": "ee86b875bff2b587118b19f964547114aa844d8affb9c9259990025de361813f",
+          "generation_sha256": "1bf342eec4856a9f56d4e5ee0a7e4f13c04d6c8c9aa83818920df82ed19d5671",
+          "csv_sha256": "191d50519fda18a2db40027725dded39d1a9305908d45b3945e3fc75285cd3e4",
+          "source_root": "baseline",
+          "source_directory": "life_national_mortality/baseline",
+          "labels": {
+            "incorrect": 1,
+            "partial": 1,
+            "omitted": 2
+          },
+          "rows": 85400,
+          "columns": 8
+        },
+        "strict_paper_only": {
+          "status": "generated",
+          "description": "This dataset contains 85,400 rows and 8 columns.\n\nIncome percentile is assigned based on household earnings relative to all other individuals of the same sex and age in the United States during each year, after excluding those with zero income. [life_expectancy:p2:w180]\n\nHousehold income is measured as adjusted gross income plus tax-exempt interest minus taxable Social Security and disability benefits for filers, and as wage earnings plus unemployment benefits for non-filers, adjusted to 2012 dollars. [life_expectancy:p2:w180]\n\nMortality rates are calculated using Social Security Administration death records, with total deaths closely matching National Center for Health Statistics data. [life_expectancy:p2:w180]\n\nMortality rates are reported for ages 40 to 76, with empirical rates observed until age 76 and a minimum reported age_at_d of 40. [life_expectancy:p2:w360] [life_expectancy:p3:w180]\n\nIncome data are available for each individual for every year from 1999 through 2014, but mortality rates are reported for years 2001 to 2014 due to the 2-year lag. [life_expectancy:p2:w180] [life_expectancy:p2:w360]\n",
+          "description_sha256": "642387ac31239f2ab9dbcd0dbfbe01c37a42412c9f4c043071a5c700d35bb0b6",
+          "generation_sha256": "6152d2349e0887b60a9d0d3772fbf6be8633d1beeb54bf5d6350f05628235cc6",
+          "csv_sha256": "191d50519fda18a2db40027725dded39d1a9305908d45b3945e3fc75285cd3e4",
+          "source_root": "revised",
+          "source_directory": "strict-description-validation/life_national_mortality",
+          "labels": {
+            "omitted": 2,
+            "partial": 2
+          },
+          "rows": 85400,
+          "columns": 8
+        },
+        "documentation_assisted": {
+          "status": "generated",
+          "description": "This dataset contains 85,400 rows and 8 columns.\n\nEach row reports the US mortality rate for a specific gender, age at death (40\u201376), year of death (2001\u20132014), and household income percentile (1\u2013100). [documentation:life_national_mortality:p1:w0]\n\nThe 'mortrate' column gives the mortality rate for the specified group, with the denominator being the 'count' at the beginning of the year. [documentation:life_national_mortality:p1:w0]\n\nThe 'gnd' column indicates gender for each group. [documentation:life_national_mortality:p1:w0]\n\nThe 'pctile' column specifies the household income percentile for the group. [documentation:life_national_mortality:p1:w0]\n\nThe 'lag' column records the number of years between income measurement and mortality rate calculation. [documentation:life_national_mortality:p1:w0]\n\nHousehold incomes are measured two years prior to the mortality rate for ages 40\u201363, and at age 61 for ages 64\u201376. [documentation:life_national_mortality:p1:w0]\n\nThe 'hh_inc' column gives the mean household income for each group. [documentation:life_national_mortality:p1:w0]\n",
+          "description_sha256": "df03b022d708dbd72cdcc6e46219f17a48800555abe7ce80e9fd80a911b6cbc9",
+          "generation_sha256": "2da56dd44647d7adcc679b641e0eb925e955047bd2dd5a367a2afd227903b523",
+          "csv_sha256": "191d50519fda18a2db40027725dded39d1a9305908d45b3945e3fc75285cd3e4",
+          "source_root": "revised",
+          "source_directory": "documented-description-validation/life_national_mortality",
+          "labels": {
+            "supported": 4
+          },
+          "rows": 85400,
+          "columns": 8
+        }
+      }
+    },
+    {
+      "dataset_id": "life_county_expectancy",
+      "checks": [
+        {
+          "check_id": "life_county_expectancy:1",
+          "target": "county row unit rather than city/CZ/state observations",
+          "reference": "health_ineq_online_table_11_readme.pdf, pp.1-2",
+          "judgments": {
+            "csv_baseline": {
+              "label": "supported",
+              "rationale": "Opening sentence identifies county-level observations. The unsupported later mention of city identifiers is an additional error outside this narrowly defined row-unit target."
+            },
+            "strict_paper_only": {
+              "label": "abstained",
+              "rationale": "Paper-only run abstained."
+            },
+            "documentation_assisted": {
+              "label": "supported",
+              "rationale": "Explicit county rows; CZ/state identified only as context."
+            }
+          }
+        },
+        {
+          "check_id": "life_county_expectancy:2",
+          "target": "income quartiles rather than calendar quarters",
+          "reference": "health_ineq_online_table_11_readme.pdf, pp.1-2",
+          "judgments": {
+            "csv_baseline": {
+              "label": "incorrect",
+              "rationale": "Calls income groups four quarters."
+            },
+            "strict_paper_only": {
+              "label": "abstained",
+              "rationale": "Paper-only run abstained."
+            },
+            "documentation_assisted": {
+              "label": "supported",
+              "rationale": "Explicit income quartiles."
+            }
+          }
+        },
+        {
+          "check_id": "life_county_expectancy:3",
+          "target": "both adjusted and unadjusted estimates",
+          "reference": "health_ineq_online_table_11_readme.pdf, pp.1-2",
+          "judgments": {
+            "csv_baseline": {
+              "label": "omitted",
+              "rationale": "No adjusted/unadjusted distinction."
+            },
+            "strict_paper_only": {
+              "label": "abstained",
+              "rationale": "Paper-only run abstained."
+            },
+            "documentation_assisted": {
+              "label": "supported",
+              "rationale": "Both adjusted and unadjusted estimates explicitly stated."
+            }
+          }
+        },
+        {
+          "check_id": "life_county_expectancy:4",
+          "target": "uncertainty fields are standard errors",
+          "reference": "health_ineq_online_table_11_readme.pdf, pp.1-2",
+          "judgments": {
+            "csv_baseline": {
+              "label": "omitted",
+              "rationale": "No uncertainty-field definition."
+            },
+            "strict_paper_only": {
+              "label": "abstained",
+              "rationale": "Paper-only run abstained."
+            },
+            "documentation_assisted": {
+              "label": "supported",
+              "rationale": "Explicit standard errors, not across-area standard deviations."
+            }
+          }
+        }
+      ],
+      "conditions": {
+        "csv_baseline": {
+          "status": "baseline_generated",
+          "description": "This dataset contains demographic and spatial information across various counties in the United States, with a total of 1,559 rows and 49 columns. It includes key variables such as county names, populations from the year 2000, and life expectancy metrics for both females and males across four quarters. The dataset also features unique identifiers for states and cities, allowing for detailed geographic analysis. Each column represents specific types of data, including population counts and life expectancy measures, which are essential for demographic studies and public health assessments. Overall, this dataset serves as a valuable resource for researchers and policymakers.",
+          "description_sha256": "56f5689bc93f06e00004f449abad0e6b0160321deab033a559641a97c9d38741",
+          "generation_sha256": "d7dae485d29239349c0e02f71044b96bc87eb0b11d8b7505690940bb30906a9a",
+          "csv_sha256": "af9a8ad1f208c10e62079db19b4d01a79c2c15ba668cdd9a98c4ef705f671565",
+          "source_root": "baseline",
+          "source_directory": "life_county_expectancy/baseline",
+          "labels": {
+            "supported": 1,
+            "incorrect": 1,
+            "omitted": 2
+          },
+          "rows": 1559,
+          "columns": 49
+        },
+        "strict_paper_only": {
+          "status": "abstained",
+          "description": "This dataset contains 1,559 rows and 49 columns.\n\nNo table-specific semantic claim passed both evidence reviews. Field meanings remain unresolved from the available paper evidence.\n",
+          "description_sha256": "ba726f704634fdb56a542fcaf09dd0db3bc462ef7918d7f258d2a6279ea4c3fe",
+          "generation_sha256": "026c8e4f5647d29325908c06e49c850e1192aa5747b1fb858054f06778330df8",
+          "csv_sha256": "af9a8ad1f208c10e62079db19b4d01a79c2c15ba668cdd9a98c4ef705f671565",
+          "source_root": "revised",
+          "source_directory": "strict-description-validation/life_county_expectancy",
+          "labels": {
+            "abstained": 4
+          },
+          "rows": 1559,
+          "columns": 49
+        },
+        "documentation_assisted": {
+          "status": "generated",
+          "description": "This dataset contains 1,559 rows and 49 columns.\n\nEach row reports county-level life expectancy point estimates and standard errors for men and women at age 40, by income quartile. [documentation:life_county_expectancy:p1:w0]\n\nBoth race-adjusted and unadjusted life expectancy estimates are reported for each gender and income quartile. [documentation:life_county_expectancy:p1:w0]\n\nEstimates are reported only for counties with populations larger than 25,000. [documentation:life_county_expectancy:p1:w0]\n\nThe table includes standard errors for each life expectancy estimate by gender, income quartile, and adjustment status. [documentation:life_county_expectancy:p1:w0] [documentation:life_county_expectancy:p2:w0]\n\nCounts of individuals by gender and income quartile are provided for each county. [documentation:life_county_expectancy:p2:w0]\n\nEach row identifies the county and its population in 2000, as well as the corresponding commuting zone and state. [documentation:life_county_expectancy:p1:w0]\n",
+          "description_sha256": "7489a97848ebddada197bd4cca539472526885ab52e6dc62344e9d8f78b172ae",
+          "generation_sha256": "2631de1fe7c13dd7ee641dc6d4001c6d9ef55a0701289d5069bd57b41def0153",
+          "csv_sha256": "af9a8ad1f208c10e62079db19b4d01a79c2c15ba668cdd9a98c4ef705f671565",
+          "source_root": "revised",
+          "source_directory": "documented-description-validation/life_county_expectancy",
+          "labels": {
+            "supported": 4
+          },
+          "rows": 1559,
+          "columns": 49
+        }
+      }
+    },
+    {
+      "dataset_id": "race_national_statistics",
+      "checks": [
+        {
+          "check_id": "race_national_statistics:1",
+          "target": "one row per parent income percentile",
+          "reference": "table_1.pdf, pp.1-3",
+          "judgments": {
+            "csv_baseline": {
+              "label": "omitted",
+              "rationale": "No row-unit percentile definition."
+            },
+            "strict_paper_only": {
+              "label": "supported",
+              "rationale": "Explicit one row per parent income percentile."
+            },
+            "documentation_assisted": {
+              "label": "supported",
+              "rationale": "Explicit row per parent percentile."
+            }
+          }
+        },
+        {
+          "check_id": "race_national_statistics:2",
+          "target": "1978-1983 birth cohorts",
+          "reference": "table_1.pdf, pp.1-3",
+          "judgments": {
+            "csv_baseline": {
+              "label": "omitted",
+              "rationale": "No cohort years."
+            },
+            "strict_paper_only": {
+              "label": "omitted",
+              "rationale": "Birth-cohort ranking is discussed without cohort years."
+            },
+            "documentation_assisted": {
+              "label": "supported",
+              "rationale": "Explicit 1978-83 cohort."
+            }
+          }
+        },
+        {
+          "check_id": "race_national_statistics:3",
+          "target": "race and gender groupings",
+          "reference": "table_1.pdf, pp.1-3",
+          "judgments": {
+            "csv_baseline": {
+              "label": "partial",
+              "rationale": "Race groups named; gender grouping not explained."
+            },
+            "strict_paper_only": {
+              "label": "omitted",
+              "rationale": "No race/gender groupings in the surviving claims."
+            },
+            "documentation_assisted": {
+              "label": "supported",
+              "rationale": "Race and gender field families explicitly defined."
+            }
+          }
+        },
+        {
+          "check_id": "race_national_statistics:4",
+          "target": "adult household income ranks rather than demographic densities",
+          "reference": "table_1.pdf, pp.1-3",
+          "judgments": {
+            "csv_baseline": {
+              "label": "omitted",
+              "rationale": "Demographic densities/educational metrics do not explain adult household income ranks."
+            },
+            "strict_paper_only": {
+              "label": "partial",
+              "rationale": "Defines child income ranks within birth cohort but does not establish that the stored kfr measures are adult household-income ranks."
+            },
+            "documentation_assisted": {
+              "label": "supported",
+              "rationale": "Defines mean child household income rank fields."
+            }
+          }
+        }
+      ],
+      "conditions": {
+        "csv_baseline": {
+          "status": "baseline_generated",
+          "description": "This dataset contains 100 rows and 69 columns, focusing on various demographic and educational metrics across different racial and ethnic groups. Key variables include counts of individuals from different backgrounds, such as American Indian, Asian, Black, Hispanic, and White populations, along with their respective densities and educational attainment levels. The dataset also measures factors like the percentage of children attending college, hours worked, and incarceration rates, providing a comprehensive view of socio-economic conditions. Each column serves a specific function, such as measurement or aggregation, making this dataset valuable for analyzing demographic trends and disparities.",
+          "description_sha256": "14a8a02c2255e90a538e70c0a5b9f6dec92e86a893984f3ec2a4e9c86b455f59",
+          "generation_sha256": "4979389bd337499de55647cd87a93aab2480a910e12fafe123492204277f326f",
+          "csv_sha256": "a223bdae32eb9c1649786ee97d3d6fcdf498e552b3ac131299c780873bc74760",
+          "source_root": "baseline",
+          "source_directory": "race_national_statistics/baseline",
+          "labels": {
+            "omitted": 3,
+            "partial": 1
+          },
+          "rows": 100,
+          "columns": 69
+        },
+        "strict_paper_only": {
+          "status": "generated",
+          "description": "This dataset contains 100 rows and 69 columns.\n\nEach row in the table represents children grouped by their parents' national income percentile, as indicated by the par_pctile column. [race_opportunity:p47:w180] [race_opportunity:p59:w180] [race_opportunity:p94:w0]\n\nChildren are assigned income percentile ranks relative to all other children in their birth cohort, while parents are ranked relative to all parents with children in the same birth cohort. [race_opportunity:p59:w180]\n",
+          "description_sha256": "ac79ce8a92c7f13679db5c50c4e33988014883ede2211824a543665e8e4024ec",
+          "generation_sha256": "c9e776ddb80aa70815e5ea5990b1e76672fdc86262253f51890c9e268b8029f7",
+          "csv_sha256": "a223bdae32eb9c1649786ee97d3d6fcdf498e552b3ac131299c780873bc74760",
+          "source_root": "revised",
+          "source_directory": "strict-description-validation/race_national_statistics",
+          "labels": {
+            "supported": 1,
+            "omitted": 2,
+            "partial": 1
+          },
+          "rows": 100,
+          "columns": 69
+        },
+        "documentation_assisted": {
+          "status": "generated",
+          "description": "This dataset contains 100 rows and 69 columns.\n\nEach row represents statistics for children born in 1978-83 at a specific parent household income percentile. [documentation:race_national_statistics:p1:w0]\n\nThe column count_pooled gives the number of children born to parents at a given income percentile, rounded to the next 100s. [documentation:race_national_statistics:p1:w0]\n\nThe columns count_[race]_pooled report the number of children born to parents at a given income percentile by race, rounded to the next 100s. [documentation:race_national_statistics:p1:w0] [documentation:race_national_statistics:p1:w180]\n\nThe columns kfr_[race]_[gender] and kfr_[race]_pooled report mean child family (household) income rank by race and gender, or pooled across gender. [documentation:race_national_statistics:p2:w0]\n\nThe columns kid_college_[race]_[gender] give the percentage of children with college attendance by race and gender, defined as having at least some college credit at age 20 or older (2005-2015 ACS). [documentation:race_national_statistics:p2:w0]\n\nThe columns kid_jail_[race]_[gender] report the percentage of children incarcerated by race and gender, defined as being incarcerated on April 1, 2010 (2010 Census short form). [documentation:race_national_statistics:p2:w0]\n\nThe columns spouse_rank_[race]_[gender] report the mean individual income rank of spouse by race and gender; children not married are assigned spousal income of 0 and are included. [documentation:race_national_statistics:p3:w0] [documentation:race_national_statistics:p3:w180]\n",
+          "description_sha256": "98d0cf3f6d43a8d4219b3d2e9993ddd5213ebaac8c6ad952a01c7da8d376f215",
+          "generation_sha256": "b84b79bcaf1131cc97be7e749f073e3dd4c67736cd7bded09a713901ff1a5d8c",
+          "csv_sha256": "a223bdae32eb9c1649786ee97d3d6fcdf498e552b3ac131299c780873bc74760",
+          "source_root": "revised",
+          "source_directory": "documented-description-retry/race_national_statistics",
+          "labels": {
+            "supported": 4
+          },
+          "rows": 100,
+          "columns": 69
+        }
+      }
+    },
+    {
+      "dataset_id": "race_cz_income",
+      "checks": [
+        {
+          "check_id": "race_cz_income:1",
+          "target": "CZ row unit rather than cities",
+          "reference": "table_4.pdf, pp.1-2",
+          "judgments": {
+            "csv_baseline": {
+              "label": "incorrect",
+              "rationale": "Calls CZs cities."
+            },
+            "strict_paper_only": {
+              "label": "abstained",
+              "rationale": "Paper-only run abstained."
+            },
+            "documentation_assisted": {
+              "label": "supported",
+              "rationale": "Explicit CZ row unit."
+            }
+          }
+        },
+        {
+          "check_id": "race_cz_income:2",
+          "target": "adult individual and household income ranks",
+          "reference": "table_4.pdf, pp.1-2",
+          "judgments": {
+            "csv_baseline": {
+              "label": "omitted",
+              "rationale": "No adult individual/household income ranks."
+            },
+            "strict_paper_only": {
+              "label": "abstained",
+              "rationale": "Paper-only run abstained."
+            },
+            "documentation_assisted": {
+              "label": "supported",
+              "rationale": "Household kfr and individual kir ranks defined."
+            }
+          }
+        },
+        {
+          "check_id": "race_cz_income:3",
+          "target": "predictions at parent income percentiles 25 and 75",
+          "reference": "table_4.pdf, pp.1-2",
+          "judgments": {
+            "csv_baseline": {
+              "label": "omitted",
+              "rationale": "No parent percentile conditions."
+            },
+            "strict_paper_only": {
+              "label": "abstained",
+              "rationale": "Paper-only run abstained."
+            },
+            "documentation_assisted": {
+              "label": "partial",
+              "rationale": "Parent percentile 25 is explicit; generic percentile template omits the numeric 75 condition."
+            }
+          }
+        },
+        {
+          "check_id": "race_cz_income:4",
+          "target": "2000 Census population counts",
+          "reference": "table_4.pdf, pp.1-2",
+          "judgments": {
+            "csv_baseline": {
+              "label": "supported",
+              "rationale": "Explicit 2000 population and race counts."
+            },
+            "strict_paper_only": {
+              "label": "abstained",
+              "rationale": "Paper-only run abstained."
+            },
+            "documentation_assisted": {
+              "label": "supported",
+              "rationale": "Explicit 2000 Census total and race population counts."
+            }
+          }
+        }
+      ],
+      "conditions": {
+        "csv_baseline": {
+          "status": "baseline_generated",
+          "description": "This dataset contains demographic information from various cities, focusing on population statistics from the year 2000. It includes total population figures as well as breakdowns by race, specifically Black, Hispanic, and White populations. The dataset features 741 rows and 21 columns, with key metrics such as the mean population and specific population percentages for different racial groups. Each city is represented by its name and a unique identifier. The data is primarily used for demographic measurement and analysis, providing insights into the racial composition and population dynamics of urban areas.",
+          "description_sha256": "96f8ef80bd2c35224c73f20a4c6075bdf462b8073829d63497af248c4241bcea",
+          "generation_sha256": "3db6bc24de493b639837fbaec4d4832321cb477a011ce5bfe549df7f138acc8e",
+          "csv_sha256": "4e8f7f9c6664f560a3fc4a51716f796c72db99eb1badeda901db04c144178ebf",
+          "source_root": "baseline",
+          "source_directory": "race_cz_income/baseline",
+          "labels": {
+            "incorrect": 1,
+            "omitted": 2,
+            "supported": 1
+          },
+          "rows": 741,
+          "columns": 21
+        },
+        "strict_paper_only": {
+          "status": "abstained",
+          "description": "This dataset contains 741 rows and 21 columns.\n\nNo table-specific semantic claim passed both evidence reviews. Field meanings remain unresolved from the available paper evidence.\n",
+          "description_sha256": "a8fe58cfbd51404e857665fcb3584866643af7f9f61f5092b8c83a376b1372b4",
+          "generation_sha256": "22b63624068a89d30e56c688f6b298e63d48879a861be9fc8f21c16b73da49fe",
+          "csv_sha256": "4e8f7f9c6664f560a3fc4a51716f796c72db99eb1badeda901db04c144178ebf",
+          "source_root": "revised",
+          "source_directory": "strict-description-retry/race_cz_income",
+          "labels": {
+            "abstained": 4
+          },
+          "rows": 741,
+          "columns": 21
+        },
+        "documentation_assisted": {
+          "status": "generated",
+          "description": "This dataset contains 741 rows and 21 columns.\n\nEach row represents a commuting zone (CZ), identified by cz and cz_name. [documentation:race_cz_income:p1:w0] [documentation:race_cz_income:p2:w0]\n\ncz_pop2000 is the total population of the CZ in the 2000 Census. [documentation:race_cz_income:p2:w0]\n\ncz_pop_black2000, cz_pop_hisp2000, and cz_pop_white2000 are 2000 Census counts for non-Hispanic Black, Hispanic, and non-Hispanic White residents in each CZ. [documentation:race_cz_income:p2:w0]\n\nkfr_pooled_p25 is the mean household income rank for children with parents at the 25th percentile, pooled across race and gender. [documentation:race_cz_income:p2:w0]\n\nkfr_black_pooled_p25 and kfr_white_pooled_p25 are mean household income ranks for Black and White children with parents at the 25th percentile, pooled across gender. [documentation:race_cz_income:p2:w0]\n\nkir_[race]_[gender]_p[pctile] columns report mean individual income rank for children by race, gender, and parent income percentile. [documentation:race_cz_income:p2:w0]\n\nIncome rank statistics are reported as bin midpoints, rounded to the second decimal; bins with fewer than 20 children are omitted. [documentation:race_cz_income:p1:w0]\n",
+          "description_sha256": "85374d9176d0a2498e19004049b932f4290991655c860a7173a9d798bfaee7dd",
+          "generation_sha256": "80be2139849da22e7f40dd1068796bc2b8959f079c492d4139e1fb1c921f4973",
+          "csv_sha256": "4e8f7f9c6664f560a3fc4a51716f796c72db99eb1badeda901db04c144178ebf",
+          "source_root": "revised",
+          "source_directory": "documented-description-retry/race_cz_income",
+          "labels": {
+            "supported": 3,
+            "partial": 1
+          },
+          "rows": 741,
+          "columns": 21
+        }
+      }
+    },
+    {
+      "dataset_id": "college_access_mobility",
+      "checks": [
+        {
+          "check_id": "college_access_mobility:1",
+          "target": "college reporting unit",
+          "reference": "Codebook-MRC-Table-1.pdf, pp.1-2",
+          "judgments": {
+            "csv_baseline": {
+              "label": "supported",
+              "rationale": "Explicit institutional entries."
+            },
+            "strict_paper_only": {
+              "label": "abstained",
+              "rationale": "Paper-only run abstained."
+            },
+            "documentation_assisted": {
+              "label": "supported",
+              "rationale": "Fresh output reports cohort counts for each college; college reporting unit is clear."
+            }
+          }
+        },
+        {
+          "check_id": "college_access_mobility:2",
+          "target": "bottom parent income quintile rather than quartile",
+          "reference": "Codebook-MRC-Table-1.pdf, pp.1-2",
+          "judgments": {
+            "csv_baseline": {
+              "label": "incorrect",
+              "rationale": "Calls par_q1 first quartile, although this table uses bottom quintile."
+            },
+            "strict_paper_only": {
+              "label": "abstained",
+              "rationale": "Paper-only run abstained."
+            },
+            "documentation_assisted": {
+              "label": "supported",
+              "rationale": "Fresh output explicitly distinguishes bottom 20% parent income group, a quintile."
+            }
+          }
+        },
+        {
+          "check_id": "college_access_mobility:3",
+          "target": "joint mobility share of all students versus conditional success rate",
+          "reference": "Codebook-MRC-Table-1.pdf, pp.1-2",
+          "judgments": {
+            "csv_baseline": {
+              "label": "omitted",
+              "rationale": "No joint versus conditional denominator distinction."
+            },
+            "strict_paper_only": {
+              "label": "abstained",
+              "rationale": "Paper-only run abstained."
+            },
+            "documentation_assisted": {
+              "label": "supported",
+              "rationale": "Fresh mr_kq5_pq1 sentence uses the conjunction of bottom-parent and top-child events over students; separate conditional sentence uses among bottom-parent children."
+            }
+          }
+        },
+        {
+          "check_id": "college_access_mobility:4",
+          "target": "per-household five-year income average versus across-student median",
+          "reference": "Codebook-MRC-Table-1.pdf, pp.1-2",
+          "judgments": {
+            "csv_baseline": {
+              "label": "partial",
+              "rationale": "Mentions median incomes but not per-household five-year averaging."
+            },
+            "strict_paper_only": {
+              "label": "abstained",
+              "rationale": "Paper-only run abstained."
+            },
+            "documentation_assisted": {
+              "label": "ambiguous",
+              "rationale": "Fresh par_median sentence still equates the reported median with a five-year average, without separating household time averaging from the across-student median."
+            }
+          }
+        }
+      ],
+      "conditions": {
+        "csv_baseline": {
+          "status": "baseline_generated",
+          "description": "This dataset contains information on various educational institutions across the United States, with 2,202 entries and 15 columns. Each entry includes a unique identifier, the name of the institution, its location, and various financial metrics such as median parental income and median student income. The dataset also features key measurements like the first quartile of parental income and the top 1% income share. Additionally, it provides insights into trends and counts related to these institutions. The data is structured to facilitate analysis of educational and economic factors at both city and state levels, making it a valuable resource for researchers and policymakers.",
+          "description_sha256": "25b548788685f4ac52f3a3bf00aa902961605a84ad65cee3df2676953e7ac710",
+          "generation_sha256": "3923c16affc716505cd182aacbca074dbf2fec75a966d67cf384aa6cd8abd879",
+          "csv_sha256": "0ccc030b1e91f9372fa4d7b05db971dfc2c842643dce0ec3ad7ad1f5fa9a604d",
+          "source_root": "baseline",
+          "source_directory": "college_access_mobility/baseline",
+          "labels": {
+            "supported": 1,
+            "incorrect": 1,
+            "omitted": 1,
+            "partial": 1
+          },
+          "rows": 2202,
+          "columns": 15
+        },
+        "strict_paper_only": {
+          "status": "abstained",
+          "description": "This dataset contains 2,202 rows and 15 columns.\n\nNo table-specific semantic claim passed both evidence reviews. Field meanings remain unresolved from the available paper evidence.\n",
+          "description_sha256": "757ee57aa2de02a49152285fa69d6a718821258b785f7392b56ae53ced0453b5",
+          "generation_sha256": "264cb2944e146ef4b92a00e547b67e92330bf34db757d2670307c92b0683ac0f",
+          "csv_sha256": "0ccc030b1e91f9372fa4d7b05db971dfc2c842643dce0ec3ad7ad1f5fa9a604d",
+          "source_root": "revised",
+          "source_directory": "strict-description-validation/college_access_mobility",
+          "labels": {
+            "abstained": 4
+          },
+          "rows": 2202,
+          "columns": 15
+        },
+        "documentation_assisted": {
+          "status": "generated",
+          "description": "This dataset contains 2,202 rows and 15 columns.\n\nMedian parent household income (par_median) is measured as average annual pre-tax household income (Adjusted Gross Income), inflation-adjusted to 2015 dollars, over the five years when the child was ages 15-19. [documentation:college_access_mobility:p1:w0] [documentation:college_access_mobility:p1:w180] [documentation:college_access_mobility:p1:w360]\n\nMedian child individual earnings in 2014 (k_median) are reported, rounded to the nearest $100. [documentation:college_access_mobility:p1:w0] [documentation:college_access_mobility:p1:w180] [documentation:college_access_mobility:p1:w360]\n\nkq5_cond_parq1 is the percent of children who reach the top 20% of the income distribution among those whose parents were in the bottom 20%. [documentation:college_access_mobility:p1:w360]\n\nmr_kq5_pq1 is the mobility rate: percent of students who have parents in the bottom 20% and themselves reach the top 20% of the income distribution. [documentation:college_access_mobility:p1:w360]\n\ncount is the average number of children per cohort for each college, calculated over the 1980, 1981, and 1982 birth cohorts (using 1983 and 1984 if needed). [documentation:college_access_mobility:p1:w0] [documentation:college_access_mobility:p1:w180] [documentation:college_access_mobility:p2:w0]\n",
+          "description_sha256": "ae936ea2cf6ce4884c58040010a6be95f2ef50ab90c3d259f142e10463240273",
+          "generation_sha256": "f55a13d3e158b356430375985538b2b2dc5826254fec5df130781dca6cfd3bbf",
+          "csv_sha256": "0ccc030b1e91f9372fa4d7b05db971dfc2c842643dce0ec3ad7ad1f5fa9a604d",
+          "source_root": "fresh",
+          "source_directory": "college_access_mobility",
+          "labels": {
+            "supported": 3,
+            "ambiguous": 1
+          },
+          "rows": 2202,
+          "columns": 15
+        }
+      },
+      "prior_documented_description_sha256": "fb1d4953cd0fb3f193c4463e56b74bebd844a41bbbb9ec4701373e96e17bd117",
+      "fresh_verification": true,
+      "fresh_output_changed": true
+    },
+    {
+      "dataset_id": "college_characteristics",
+      "checks": [
+        {
+          "check_id": "college_characteristics:1",
+          "target": "college or college-group row unit",
+          "reference": "Codebook-MRC-Table-10.pdf, pp.1-3; mapped paper p.69 for exp_instr_pc_2000; actual CSV names",
+          "judgments": {
+            "csv_baseline": {
+              "label": "partial",
+              "rationale": "College rows described without the college-group unit."
+            },
+            "strict_paper_only": {
+              "label": "omitted",
+              "rationale": "Field definitions do not explicitly state row/group unit."
+            },
+            "documentation_assisted": {
+              "label": "supported",
+              "rationale": "Explicit college or college-group super_opeid rows."
+            }
+          }
+        },
+        {
+          "check_id": "college_characteristics:2",
+          "target": "correct field-specific expenditure units: exp_instr_pc is per student; exp_instr is total",
+          "reference": "Codebook-MRC-Table-10.pdf, pp.1-3; mapped paper p.69 for exp_instr_pc_2000; actual CSV names",
+          "judgments": {
+            "csv_baseline": {
+              "label": "omitted",
+              "rationale": "No instructional expenditure definition."
+            },
+            "strict_paper_only": {
+              "label": "supported",
+              "rationale": "Explicit exp_instr_pc_2000 per-student unit; does not map the total field to a per-student unit."
+            },
+            "documentation_assisted": {
+              "label": "omitted",
+              "rationale": "No instructional expenditure claim survives; omission is not a unit correction."
+            }
+          }
+        },
+        {
+          "check_id": "college_characteristics:3",
+          "target": "Asian OR Pacific Islander coverage when describing that share",
+          "reference": "Codebook-MRC-Table-10.pdf, pp.1-3; mapped paper p.69 for exp_instr_pc_2000; actual CSV names",
+          "judgments": {
+            "csv_baseline": {
+              "label": "omitted",
+              "rationale": "Generic race breakdown does not identify Asian/Pacific coverage."
+            },
+            "strict_paper_only": {
+              "label": "supported",
+              "rationale": "Explicit Asian or Pacific Islander share."
+            },
+            "documentation_assisted": {
+              "label": "omitted",
+              "rationale": "Only Black share is described; Asian/Pacific field omitted."
+            }
+          }
+        },
+        {
+          "check_id": "college_characteristics:4",
+          "target": "graduation within 150% of normal time",
+          "reference": "Codebook-MRC-Table-10.pdf, pp.1-3; mapped paper p.69 for exp_instr_pc_2000; actual CSV names",
+          "judgments": {
+            "csv_baseline": {
+              "label": "omitted",
+              "rationale": "No 150%-of-normal-time graduation definition."
+            },
+            "strict_paper_only": {
+              "label": "supported",
+              "rationale": "Explicit 2002 150%-of-normal-time graduation definition."
+            },
+            "documentation_assisted": {
+              "label": "supported",
+              "rationale": "Explicit 2013 150%-of-normal-time graduation definition."
+            }
+          }
+        }
+      ],
+      "conditions": {
+        "csv_baseline": {
+          "status": "baseline_generated",
+          "description": "This dataset contains information on various educational institutions across the United States, including details such as institution name, location, enrollment figures, and financial metrics. It features 2,463 rows and 49 columns, with key identifiers like super_opeid and geographic data including state and county. The dataset also includes financial data such as average faculty salaries and sticker prices for tuition over different years. Additionally, it provides demographic breakdowns of student populations by race and field of study. Each column is carefully categorized, allowing for comprehensive analysis of educational trends and institutional performance.",
+          "description_sha256": "809c17a4ceafa51e7944734a547385ffc0242956045c456eda829d3210147e74",
+          "generation_sha256": "5f98704165f99ec62ba14fe5723de7a6a5037c3aff24939bc71f7d3dc3123275",
+          "csv_sha256": "0a2536cd9a93bdee573b279d5e2aa5fabbc24f3d32386547dc1a910e9d4d594f",
+          "source_root": "baseline",
+          "source_directory": "college_characteristics/baseline",
+          "labels": {
+            "partial": 1,
+            "omitted": 3
+          },
+          "rows": 2463,
+          "columns": 49
+        },
+        "strict_paper_only": {
+          "status": "generated",
+          "description": "This dataset contains 2,463 rows and 49 columns.\n\nThe variable black_share_fall_2000 represents the fraction of undergraduate students at a college who are Black alone, as measured in the IPEDS Fall Enrollment survey in 2000. [college_mobility:p60:w0] [college_mobility:p60:w180] [college_mobility:p69:w180]\n\nThe variable asian_or_pacific_share_fall_2000 is defined as the fraction of undergraduate students at a college who are Asian or Pacific Islander, based on IPEDS data from 2000. [college_mobility:p60:w0] [college_mobility:p69:w180]\n\nThe variable hisp_share_fall_2000 measures the fraction of undergraduate students at a college who are Hispanic, using IPEDS Fall Enrollment survey data from 2000. [college_mobility:p60:w0] [college_mobility:p69:w180]\n\nThe variable grad_rate_150_p_2002 measures the graduation rate for full-time undergraduates who graduate within 150% of normal time, as reported in IPEDS for 2002. [college_mobility:p69:w180]\n\nThe variable exp_instr_pc_2000 is defined as instructional expenditure per student, excluding operations, maintenance, and interest, divided by total enrollment in IPEDS for 2000. [college_mobility:p69:w180]\n\nThe variable endowment_pc_2000 is computed as the ending value of endowment assets in 2000 divided by total undergraduate enrollment in the fall of 2000, both from IPEDS. [college_mobility:p60:w0]\n\nThe variable avgfacsal_2001 measures the average salary for full-time faculty members on 9-month equated contracts in the academic year 2001-02, as reported in the IPEDS Delta Cost Project Database. [college_mobility:p60:w0]\n\nThe variables pct_arthuman_2000, pct_business_2000, pct_health_2000, pct_multidisci_2000, pct_publicsocial_2000, pct_stem_2000, pct_socialscience_2000, and pct_tradepersonal_2000 represent the share of degrees awarded by college in IPEDS (2000) categorized by major field. [college_mobility:p105:w0] [college_mobility:p105:w180]\n",
+          "description_sha256": "a4db571934830dafdf986a7f85854765d7138e5009b6264fccc4562a012da409",
+          "generation_sha256": "be8f84ad969031af17676309f67a8cd132e4ab817c62dc40d317c1db73e8effe",
+          "csv_sha256": "0a2536cd9a93bdee573b279d5e2aa5fabbc24f3d32386547dc1a910e9d4d594f",
+          "source_root": "revised",
+          "source_directory": "strict-description-retry/college_characteristics",
+          "labels": {
+            "omitted": 1,
+            "supported": 3
+          },
+          "rows": 2463,
+          "columns": 49
+        },
+        "documentation_assisted": {
+          "status": "generated",
+          "description": "This dataset contains 2,463 rows and 49 columns.\n\nEach row represents a college or college group, uniquely identified by super_opeid, with enrollment-weighted means for grouped colleges except for location and tier variables, which use the largest college. [documentation:college_characteristics:p1:w0]\n\nThe region column codes the Census region of the college: 1=Northeast, 2=Midwest, 3=South, 4=West. [documentation:college_characteristics:p1:w0]\n\nThe tier column categorizes colleges by selectivity and type, with values from 1 (Ivy Plus) to 12 (Less than two year schools of any type). [documentation:college_characteristics:p1:w0] [documentation:college_characteristics:p1:w180]\n\nThe grad_rate_150_p_2013 column reports the percentage of students graduating within 150 percent of normal time at four-year and two-year institutions in 2013. [documentation:college_characteristics:p2:w0]\n\nThe scorecard_netprice_2013 column gives the net cost of attendance for students in the bottom 20% income quintile in 2013, from the College Scorecard. [documentation:college_characteristics:p2:w0] [documentation:college_characteristics:p2:w180]\n\nThe black_share_fall_2000 column measures the share of Black undergraduate students enrolled in Fall 2000. [documentation:college_characteristics:p2:w180]\n\nThe avgfacsal_2013 column gives the average faculty salary at the college in 2013. [documentation:college_characteristics:p2:w0]\n",
+          "description_sha256": "202c9ae092884ad12157d070d8cd45c7ceec244abbbd278477fba45f38d2313f",
+          "generation_sha256": "eeb61c876e5002235097a26bc0f7eb24eb2cca4d5e43918af4987454cf7be234",
+          "csv_sha256": "0a2536cd9a93bdee573b279d5e2aa5fabbc24f3d32386547dc1a910e9d4d594f",
+          "source_root": "revised",
+          "source_directory": "documented-description-validation/college_characteristics",
+          "labels": {
+            "supported": 2,
+            "omitted": 2
+          },
+          "rows": 2463,
+          "columns": 49
+        }
+      }
+    }
+  ],
+  "annotation_sha256": "bab09d6ae6ce0431928d1dcde54a5145f4285f7d862b43cc286b9ce2172916c3",
+  "rubric_sha256": "1f8f22d0f1de0827be248f05551bd3ec923538fee9b52998817790400f612858"
+}
