@@ -361,3 +361,12 @@ has the same 40 semantic targets; supported, partial, missing, incorrect, ambigu
 and abstained outcomes remain separate. Longer outputs, different models/prompts,
 and added documentation limit causal comparisons. Codebook-assisted agreement is
 source consistency, not independent held-out accuracy.
+
+### Project write-up
+
+The completed [project report](report/PROJECT_REPORT.md) presents the research
+question, dataset inventory, methods, results, limitations, references and
+reproduction instructions. An [editable Word version](report/Dataset_Description_Project_Report.docx)
+is included. [Report instructions](report/README.md) explain how to reproduce the
+evaluation and rebuild both versions. The report preserves the distinction
+between targeted source-consistency checks and independent accuracy evaluation.
