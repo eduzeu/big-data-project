@@ -2,15 +2,17 @@
 
 [Read the report](PROJECT_REPORT.md) or open
 [the editable Word version](Dataset_Description_Project_Report.docx).
-The Word report is five pages, uses black text, and has no personal name or
-completion date. It covers the research question, ten datasets, three conditions,
+The Word report is three pages in a two-column conference-style layout, uses
+black text, and has no personal name or completion date. It covers the research question, ten datasets, three conditions,
 retrieval and review methods, evaluation, results, limitations, and references.
 
 The results describe a focused development comparison. Codebook agreement in the
 documented condition is source consistency because the codebooks were generation
 inputs. The report includes the remaining median-income ambiguity and missing
-highly cited inventor definition. It has not been checked against a separate
-course submission rubric.
+highly cited inventor definition. A course-requirements review identified unfinished proposal components and
+missing report sections, including related work, an explicit problem formulation,
+verified team contributions and the team repository link. This is a development
+draft, not a submission-ready final report. The layout is not an official ACM template.
 
 ## Recompute the evaluation
 
